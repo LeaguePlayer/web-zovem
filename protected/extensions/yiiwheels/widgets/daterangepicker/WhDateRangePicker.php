@@ -8,9 +8,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.daterangepicker
- * @uses YiiStrap.helpers.TbHtml
+ * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.helpers.TbArray');
 
 class WhDateRangePicker extends CInputWidget
 {
@@ -32,17 +32,12 @@ class WhDateRangePicker extends CInputWidget
     public $pluginOptions = array();
 
     /**
-     * @var array the HTML attributes for the widget container.
-     */
-    public $htmlOptions = array();
-
-    /**
      * Initializes the widget.
      */
     public function init()
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
-        $this->htmlOptions['id'] = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $this->htmlOptions['id'] = TbArray::getValue('id', $this->htmlOptions, $this->getId());
     }
 
     /**
@@ -129,7 +124,7 @@ class WhDateRangePicker extends CInputWidget
 
         /* initialize plugin */
         $selector = null === $this->selector
-            ? '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId())
+            ? '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId())
             : $this->selector;
 
         $callback = ($this->callback instanceof CJavaScriptExpression)

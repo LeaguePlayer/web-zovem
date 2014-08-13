@@ -159,3 +159,14 @@ span.offset {
         padding-top: 0;
     }
 }
+
+#map { margin: 0 0 20px 20px; }
+#map label { width: auto; display:inline; }
+#map img { max-width: none; }
+
+.modal .datepicker { margin-top: 0px; }
+.modal-body { overflow-y: inherit; }
+
+.fc-event-time{
+    display:none;
+}

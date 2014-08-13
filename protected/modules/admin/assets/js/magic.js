@@ -1,3 +1,138 @@
+function placeMarker(coords) {
+    if(typeof marker !== 'undefined') {
+        lastCoords = marker.getPosition();
+        marker.setPosition(coords);
+    }
+    else {
+        marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+            draggable: true,
+        });
+        google.maps.event.addListener(marker, 'dragend', function(){
+            geocodePosition(marker.getPosition());
+        });
+    }
+}
+
+function restoreMarker() {
+    if((typeof marker !== 'undefined') && (typeof lastCoords !== 'undefined')) {
+        marker.setPosition(lastCoords);
+    }
+    alert('К сожалению, нам не удалось определить адрес метки или мы не можем разместить мероприятие в этом городе.');
+}
+
+function geocodePosition(pos) 
+{
+   geocoder = new google.maps.Geocoder();
+   geocoder.geocode
+    ({
+        latLng: pos
+    }, 
+        function(results, status) 
+        {
+            if (status == google.maps.GeocoderStatus.OK) 
+            {
+                formatted_address = results[0].formatted_address;
+                var countryError = true;
+                for(var i=0; i<results[0].address_components.length;i++) {
+                    if ($.inArray('country', results[0].address_components[i].types) != -1) {
+                        country = results[0].address_components[i].long_name;
+                        var countryExistsError = true;
+                        for (var j=0;j<$('#Contents_country_id option').length;j++) {
+                            if ($('#Contents_country_id option:eq('+j+')').text() == country) {
+                                cityError = true;
+                                for(var k=0; k<results[0].address_components.length;k++) {
+                                    if ($.inArray('locality', results[0].address_components[k].types) != -1) {
+                                        city = results[0].address_components[k].long_name;
+                                        $.post('/admin/city/cityExists', { title: city }, function(data) {
+                                            if (data == 'false') {
+                                                restoreMarker();
+                                            }
+                                            else {
+                                                $('#Contents_country_id').val($('#Contents_country_id option:eq('+j+')').val());
+                                                currentCity = $('#Contents_city_id').val();
+                                                $.post('/admin/event/dynamiccities', $('#Contents_city_id').parents('form').serialize(), function(html){
+                                                    $('#Contents_city_id').html(html);
+                                                    for (var l=0;l<$('#Contents_city_id option').length;l++) {
+                                                        if ($('#Contents_city_id option:eq('+l+')').text() == city) {
+                                                            $('#Contents_city_id').val($('#Contents_city_id option:eq('+l+')').val());
+                                                            break;
+                                                        }
+                                                    }
+                                                    if ($.inArray(currentCity, $("#Contents_city_id option").map(function() { return $(this).val(); }) ) == -1) {
+                                                        $("#Contents_metro_id option[value='']").attr('selected', true)
+                                                    }
+                                                    else {
+                                                        $.post('/admin/event/dynamicmetros', $('#Contents_metro_id').parents('form').serialize(), function(html){
+                                                            $('#Contents_metro_id').html(html);
+                                                        });
+                                                    }
+                                                    var endPos = formatted_address.indexOf(city)-2;
+                                                    $('#Contents_address').val(formatted_address.substr(0, endPos));
+                                                });
+                                            }
+                                        });
+                                        cityError = false;
+                                        break;
+                                    }
+                                }
+                                countryExistsError = cityError;
+                                break;
+                            }
+                        }
+                        countryError = countryExistsError;
+                        break;
+                    }
+                }
+                if (countryError) 
+                    restoreMarker();
+            } 
+        }
+    );
+}
+
+function addMarker(event) {
+    placeMarker(event.latLng);
+    geocodePosition(marker.getPosition());
+}
+
+function geocode()
+{
+    var address = null;
+    if ($('#Contents_country_id').val()) {
+        address = $('#Contents_country_id').find(":selected").text();
+        if ($('#Contents_city_id').val()) {
+            address += ', ' + $('#Contents_city_id').find(":selected").text();
+            if ($('#Contents_address').val()) {
+                address += ', ' + $('#Contents_address').val();
+            }
+        }
+    } 
+    
+
+    var geocoder = new google.maps.Geocoder(); 
+    geocoder.geocode({
+            address : address, 
+            region: 'RU' 
+        },
+        function(results, status) {
+            if (status.toLowerCase() == 'ok') {
+                // Get center
+                var coords = new google.maps.LatLng(
+                    results[0]['geometry']['location'].lat(),
+                    results[0]['geometry']['location'].lng()
+                );
+                
+                map.setCenter(coords);
+                map.setZoom(18);
+
+                // Set marker also
+                placeMarker(coords);
+            }
+        }
+    );
+}
 
 $(document).ready(function() {
     $('input[id*=img_]:file').bind('change', handleFileSelect);
@@ -5,7 +140,40 @@ $(document).ready(function() {
         var $this = $(this);
         deletePhoto($this);
     });
+
+
+    $('body').on('change','#Contents_country_id, #Contents_city_id, #Contents_address',function(){
+        geocode();
+    });
+
+
+    if ( $('.checkclass').length ) {
+        $('.checkclass').on('click', function(){
+            if ($('.checkclass:checked').length)
+                $('.deleteChecked').prop('disabled', false);
+            else 
+                $('.deleteChecked').prop('disabled', true);
+        });
+
+        $('.deleteChecked').on('click', function(){
+            var ids = [];
+            $('.checkclass:checked').each(function(){
+                ids.push($(this).val());
+            });
+
+            if (window.confirm('Вы уверены, что хотите удалить выбранные записи?')) {
+                $.post("/admin/event/massDelete/", { ids: ids }, function(data) {
+                    alert('Выбранные записи были успешно удалены.');
+                    location.reload(true);
+                });
+            }
+
+            return false;
+        });
+    }
+
 });
+
 
 
 

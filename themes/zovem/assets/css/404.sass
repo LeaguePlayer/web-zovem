@@ -1,0 +1,85 @@
+$main-color: #221f20
+
+body
+	background: #8b8b8b
+	font-size: 14px
+	color: $main-color
+
+$break-nano: 380px
+$break-micro: 690px
+$break-small: 940px
+$break-large: 1400px
+$padding: 20px
+$large-height: 470px
+
+html, body
+	height: 100%
+
+.page404
+	height: 100%
+	background: url(../img/404.png) white
+	border: 20px #8b8b8b solid
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: border-box
+	box-sizing: border-box
+	
+.page404 .wrap
+	background: url(../img/404.jpg) no-repeat center center
+	position: fixed
+	top: 50%
+	margin-top: -$large-height/2		
+	left: 50%
+	width: $break-small - 2*$padding
+	height: 470px - 2*$padding
+	margin-left: -($break-small - 2*$padding)/2 
+	margin-top: -$large-height/2
+	@media screen and (max-width: $break-small) 
+		width: $break-micro - 2*$padding
+		margin-left: -($break-micro - 2*$padding)/2 
+	@media screen and (max-width: $break-micro) 
+		width: $break-nano
+		margin-left: -($break-nano)/2 
+		background-image: none
+		padding-left: 20px
+
+		
+h1
+	@media screen and (min-width: $break-micro)
+		display: none 
+
+.logo
+	margin: 0 0 65px 0
+.logo a
+	display: block
+	width: 123px
+	height: 37px
+	background: url(../img/logo.png) no-repeat
+h2 
+	margin: 0 0 8px 0
+	font-weight: normal
+	font-size: 18px
+p
+	margin: 0 0 8px 0
+
+p a
+	color: $main-color
+	text-decoration: none
+	border-bottom: 1px #83d0f6 solid
+p a:hover
+	color: #ff6600
+	border-bottom: 1px #ff6600 solid
+p a:active	
+	color: #83d0f6
+	border-bottom: 1px #83d0f6 solid
+
+.offers
+	margin: 0 0 33px 0
+
+.search input
+	width: 220px
+	height: 30px
+	line-height: 30px
+	background: url('../img/search-small.png') no-repeat #eeeeee 10px 9px
+	padding: 0 0 0 30px
+	border: none 
+	min-width: 120px

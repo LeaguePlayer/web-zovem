@@ -7,7 +7,7 @@ class Profile extends UActiveRecord
 	 * @var integer $user_id
 	 * @var boolean $regMode
 	 */
-	public static $regMode = false;
+	public static $regMode = true;
 	
 	private static $_model;
 	private static $_modelReg;
@@ -67,6 +67,7 @@ class Profile extends UActiveRecord
 							$field_rule = array_merge($field_rule,(array)$validator[$name]);
 							if ($field->error_message) $field_rule['message'] = UserModule::t($field->error_message);
 							array_push($rules,$field_rule);
+							
 						}
 					} else {
 						$field_rule = array($field->varname, $field->other_validator);
@@ -98,6 +99,7 @@ class Profile extends UActiveRecord
 			array_push($rules,array(implode(',',$numerical), 'numerical', 'integerOnly'=>true));
 			array_push($rules,array(implode(',',$float), 'type', 'type'=>'float'));
 			array_push($rules,array(implode(',',$decimal), 'match', 'pattern' => '/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/'));
+			
 			self::$_rules = $rules;
 		}
 		return self::$_rules;

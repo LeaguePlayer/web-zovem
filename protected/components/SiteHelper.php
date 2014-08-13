@@ -120,4 +120,19 @@ class SiteHelper {
 	    $message = str_replace("\n.", "\n..", $message);
         return mail($to,'=?UTF-8?B?'.base64_encode($subject).'?=',$message,$headers);
     }
+
+    public static function timesToTimes($serverTimes) {
+    	$result = array();
+    	foreach ($serverTimes as $i => $time) {
+    		$result[] = array(
+    			'id' => $i,
+    			'date' => $time->date,
+    			'start' => $time->start_time,
+    			'end' => $time->end_time,
+    			'_id' => $time->id,
+    		);
+    	}
+    	return $result;
+    }
+
 }

@@ -74,7 +74,11 @@ class UserModule extends EWebModule
 	 * @desc User model relation from other models
 	 * @see http://www.yiiframework.com/doc/guide/database.arr
 	 */
-	public $relations = array();
+	public $relations = array(
+        'contents'=>array(User::HAS_MANY, 'Contents', 'user_id'),
+        'templates'=>array(User::HAS_MANY, 'Template', 'user_id'),
+        'events'=>array(User::HAS_MANY, 'Event', 'user_id'),
+	);
 	
 	/**
 	 * @var array
@@ -85,7 +89,7 @@ class UserModule extends EWebModule
 	/**
 	 * @var boolean
 	 */
-	public $captcha = array('registration'=>true);
+	public $captcha = array('registration'=>false);
 	
 	/**
 	 * @var boolean

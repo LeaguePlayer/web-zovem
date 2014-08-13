@@ -44,8 +44,9 @@ class AdminModule extends EWebModule
 		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/jquery-ui-bootstrap/custom-theme/jquery-ui-1.9.2.custom.css');
         Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/jquery-ui-bootstrap/custom-theme/jquery.ui.1.9.2.ie.css');
         Yii::app()->clientScript->registerCoreScript('jquery.ui');
-		Yii::app()->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/knockout.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/knockout.js', CClientScript::POS_END);
         Yii::app()->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/magic.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/times.js', CClientScript::POS_END);
 	}
 
 

@@ -1,0 +1,22 @@
+ul.hybridauth-providerlist  {	
+	list-style-type: none;
+}
+
+ul.hybridauth-providerlist li {
+	float:left;
+	text-decoration: none;
+}
+
+.hybridauth-providerlist li.active {
+	background-color:green;
+	margin:5px;
+}
+.ui-dialog .ui-dialog-titlebar-close span {
+	margin: -8px 0 0 -9px !important;
+}
+.ui-dialog .ui-dialog-content {
+	overflow: hidden !important;
+}
+#hybridauth-openid-div form {
+	margin: 20px 0 0 0;
+}

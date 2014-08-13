@@ -7,21 +7,23 @@ return array_replace_recursive(
         'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
         'name'=>'Каркас приложения',
         'language' => 'ru',
-        'theme'=>'default',
+        'theme'=>'zovem',
         // preloading 'log' component
         'preload'=>array(
             'log',
             'config',
         ),
 		'aliases'=>array(
-			'appext'=>'application.extensions',
+            'appext'=>'application.extensions',
 		),
         // autoloading model and component classes
         'import'=>array(
             'application.models.*',
             'application.components.*',
             'application.behaviors.*',
-			'appext.imagesgallery.models.*'
+            'appext.imagesgallery.models.*',
+            'application.modules.hybridauth.controllers.*',
+			'application.modules.user.models.*',
         ),
         'modules'=>array(
             'admin'=>array(),
@@ -39,6 +41,42 @@ return array_replace_recursive(
                 'returnUrl' => array('/user/profile'),
                 'returnLogoutUrl' => array('/user/login'),
             ),
+            'hybridauth' => array(
+                'baseUrl' => 'http://'. $_SERVER['SERVER_NAME'] . '/hybridauth', 
+                'withYiiUser' => true, // Set to true if using yii-user
+                "providers" => array ( 
+                    
+     
+                    "vkontakte" => array ( 
+                        "enabled" => true,
+                        "keys"    => array ( "id" => "4350377", "secret" => "y0mJYEGQxIkE8gETPJll" ),
+                        "scope"   => "", 
+                        "display" => "" 
+                    ),
+     
+                    "facebook" => array ( 
+                        "enabled" => true,
+                        "keys"    => array ( "id" => "501599393296930", "secret" => "a7ca8048f1384a1acd401eaa434f6741" ),
+                        "scope"   => "", 
+                        "display" => "" 
+                    ),
+     
+                    "twitter" => array ( 
+                        "enabled" => true,
+                        "keys"    => array ( "key" => "", "secret" => "" ) 
+                    ),
+                    
+                    "openid" => array (
+                        "enabled" => true
+                    ),
+
+                    "google" => array ( 
+                        "enabled" => true,
+                        "keys"    => array ( "id" => "", "secret" => "" ),
+                        "scope"   => ""
+                    ),
+                )
+            ),
         ),
         // application components
         'components'=>array(
@@ -46,10 +84,10 @@ return array_replace_recursive(
                 'class' => 'DConfig'
             ),
             'db' => array(
-                'connectionString' => 'mysql:host=localhost;dbname=magic',
+                'connectionString' => 'mysql:host=localhost;dbname=zovem',
                 'emulatePrepare' => true,
                 'username' => 'root',
-                'password' => 'qwe123',
+                'password' => '',
                 'charset' => 'utf8',
                 'tablePrefix' => 'tbl_',
             ),

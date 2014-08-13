@@ -202,4 +202,21 @@ class EActiveRecord extends CActiveRecord
         if ( !empty($this->update_time) )
             return SiteHelper::russianDate($this->update_time).' в '.date('H:i', $this->update_time);
     }
+
+    public static function getTitles()
+    {
+        $result = array();
+
+        $model = get_called_class();
+
+        if ($model::model()->hasAttribute('title')) {
+            $items = $model::model()->findAll();
+            foreach ($items as $i => $item) {
+                $result[$item->id] = $item->title;
+            }
+        }
+
+        return $result;
+    }
+
 }

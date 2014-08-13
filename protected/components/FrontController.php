@@ -19,6 +19,13 @@ class FrontController extends Controller
         return $this->route == 'site/index';
     }
 
+    protected function beforeAction($action){
+        if(defined('YII_DEBUG') && YII_DEBUG){
+            Yii::app()->assetManager->forceCopy = true;
+        }
+        return parent::beforeAction($action);
+    }
+
     public function beforeRender($view)
     {
 		$this->buildMenu();

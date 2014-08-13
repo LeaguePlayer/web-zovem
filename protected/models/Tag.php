@@ -7,7 +7,7 @@
  * @property integer $id
  * @property string $value
  */
-class Tag extends CActiveRecord
+class Tag extends EActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -57,7 +57,7 @@ class Tag extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'value' => 'Тэг',
+			'value' => 'Тема',
 		);
 	}
 

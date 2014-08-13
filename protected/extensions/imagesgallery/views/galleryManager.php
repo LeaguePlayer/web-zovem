@@ -123,8 +123,8 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#" class="btn btn-primary save-changes"><?php echo Yii::t('GalleryContainer.main', 'Save changes')?></a>
-			<a href="#" class="btn" data-dismiss="modal"><?php echo Yii::t('GalleryContainer.main', 'Close')?></a>
+			<a href="#" class="btn btn-primary save-changes"><?php echo Yii::t('GalleryManager.main', 'Save changes')?></a>
+			<a href="#" class="btn" data-dismiss="modal"><?php echo Yii::t('GalleryManager.main', 'Close')?></a>
 		</div>
 
 

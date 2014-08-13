@@ -26,7 +26,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>UserModule::getAdmins(),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -39,7 +39,7 @@ class UserController extends Controller
 	 */
 	public function actionView()
 	{
-		$model = $this->loadModel();
+		$model = $this->loadModel('User',$_GET['id']);
 		$this->render('view',array(
 			'model'=>$model,
 		));
@@ -69,18 +69,6 @@ class UserController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 */
-	public function loadModel()
-	{
-		if($this->_model===null)
-		{
-			if(isset($_GET['id']))
-				$this->_model=User::model()->findbyPk($_GET['id']);
-			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
-		}
-		return $this->_model;
-	}
-
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

@@ -81,4 +81,8 @@ class WebUser extends AuthWebUser
         return Yii::app()->getModule('user')->isAdmin();
     }
 
+    public function getFullName() {
+        return $this->first_name.' '.$this->last_name;
+    }
+
 }

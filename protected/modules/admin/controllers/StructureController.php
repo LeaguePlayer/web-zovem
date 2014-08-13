@@ -91,13 +91,14 @@ class StructureController extends AdminController
         }
 
         $modelName = $node->material->class_name;
+        $controllerID = lcfirst($modelName);
+        $this->redirect(array("/admin/{$controllerID}/list")); die();
         $model = $modelName::model()->findByAttributes(array(
             'node_id'=>$node_id
         ));
-        $controllerID = lcfirst($modelName);
         if ( !$model )
             $this->redirect(array("/admin/{$controllerID}/create", 'node_id'=>$node_id));
-        $this->redirect(array("/admin/{$controllerID}/update", 'id'=>$model->id, 'node_id'=>$node_id));
+        $this->redirect(array("/admin/{$controllerID}/list", 'id'=>$model->id, 'node_id'=>$node_id));
     }
 
 

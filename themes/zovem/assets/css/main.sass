@@ -1,0 +1,2253 @@
+@charset "UTF-8"
+
+$main-color: #221f20
+$border-color: #252525
+$bright: #eeeeee
+$underline-color: #83d0f6
+$main-font-size: 14px
+$orange-color: #ff6600
+$minor-color: #999999
+$light-color: #787878
+$brighter-color: #dddddd
+$gray-color: #bfbfbf
+body
+	margin: 20px
+	min-width: 320px
+	color: $main-color
+	font-size: $main-font-size
+a
+	color: $main-color
+	text-decoration: none
+a:hover
+	color: $underline-color
+a:active
+	color: $orange-color
+h1
+	font-weight: normal
+	font-size: 24px
+	margin: 0
+h2
+	font-size: 18px
+	font-weight: normal
+	margin: 0
+h3
+	font-size: 16px
+	font-weight: normal
+	margin: 0
+label
+	cursor: pointer
+.wrap
+	margin: 0 auto
+	max-width: 1400px
+
+html
+	-webkit-text-size-adjust: none
+=dashed-link($color)
+	text-decoration: none
+	border-bottom: 1px $color dashed
+=solid-link($color)
+	text-decoration: none
+	border-bottom: 1px $color solid
+$dropdown-up-position: -4px
+=dropdown($pos)
+	position: absolute
+	content: ""
+	width: 7px
+	height: 4px
+	background: url(../img/dropdown.png) 0 $pos no-repeat
+	top: 0.5em
+	right: -12px
+=dropdown-white($pos)
+	+dropdown($pos)
+	background: url(../img/dropdown.png) -7px $pos no-repeat
+=dropdown-orange($pos)
+	+dropdown($pos)
+	background: url(../img/dropdown.png) -14px $pos no-repeat
+
+.transparent
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"
+	filter: alpha(opacity=50)
+	-moz-opacity: 0.5
+	-khtml-opacity: 0.5
+	opacity: 0.5
+.list-reset 
+	list-style-type: none
+	margin: 0
+	padding: 0
+.inline-block-container-fix
+	font-size: 0px
+	letter-spacing: normal
+	word-spacing: normal
+.inline-block-fix
+	font-size: $main-font-size	
+
+	
+.gray-tag
+	border: none !important
+	display: inline-block
+	height: 12px
+	line-height: 12px
+	text-transform: uppercase
+	background: $gray-color url('../img/triangle.png') no-repeat
+	color: white
+	font-size: 8px
+	padding: 0 3px 0 9px
+	margin: 0 3px 0 0
+.blue-tag
+	@extend .gray-tag
+	background-color: $underline-color
+	background-position: 0 -12px
+.orange-tag
+	@extend .gray-tag
+	background-color: $orange-color
+	background-position: 0 -24px
+.boxsizing-border 
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: border-box
+	box-sizing: border-box
+
+
+//баннеры сверху
+$maxmobile: 690px
+$maxtablet: 940px
+$maxdesktop: 1400px
+.top-banners 
+	text-align: justify
+	margin-bottom: 1em
+.top-banners:before
+	content: ''
+	display: block
+	width: 100%
+	margin-bottom: -1.2em
+.top-banners:after
+	content: ''
+	display: inline-block
+	width: 100%
+.top-banners a
+	display: inline-block
+	position: relative
+	top: 1.2em
+.top-banners a img 
+	@media screen and (max-width: $maxtablet) 
+		width: 150px
+	@media screen and (max-width: $maxmobile) 
+		width: 80px
+
+//хедер
+.header 
+	@media screen and (min-width: $maxtablet) 
+		border-bottom: 1px $bright solid
+	vertical-align: bottom
+	margin: 0 0 19px 0
+	position: relative
+.header .logo 
+	display: inline-block
+	font-size: 0
+	margin: 0 14px 11px 0
+.header .logo a
+	display: inline-block
+	width: 123px
+	height: 29px
+	background: url('../img/logo.png')
+.header .city 
+	display: inline-block
+	position: relative
+	top: -4px
+	margin: 0 0 11px 0
+.header .city > a
+	+dashed-link($underline-color)
+	position: relative
+.header .city > a:after
+	+dropdown(0)
+.header .menu
+	@media screen and (min-width: $maxtablet) 
+		float: right
+		display: inline-block
+.header .menu ul
+	@extend .list-reset
+	@extend .inline-block-container-fix
+.header .menu ul li
+	@extend .inline-block-fix
+	@media screen and (min-width: $maxmobile) 
+		display: inline-block
+	border: 1px $bright solid
+	@media screen and (min-width: $maxtablet) 
+		border-bottom: none
+.header .menu ul li a 
+	display: inline-block
+	padding: 13px 24px 14px 24px
+	@media screen and (max-width: $maxmobile) 
+		width: 100%
+.header .menu ul li.current 
+	border: 3px $border-color solid
+	@media screen and (min-width: $maxtablet) 
+		border-bottom: none
+.header .menu ul li.current a
+	padding: 11px 24px 14px 24px
+
+//главная - верхний фильтр
+.top-filter 
+	@extend .inline-block-container-fix
+	margin: 0 0 20px 0
+	position: relative
+.top-filter div 
+	vertical-align: top
+.new-action 
+	@extend .inline-block-fix
+	display: inline-block
+	margin-right: 2%
+.new-action a 
+	@extend .button
+	display: inline-block
+	background-image: url(../img/plus.png)
+	background-repeat: no-repeat 
+	vertical-align: middle
+	padding: 0 19px 0 46px !important
+.top-filter .filter-box 
+	@extend .inline-block-fix
+	@extend .inline-block-container-fix
+	position: relative
+	@media screen and (min-width: $maxtablet) 
+		display: inline-block
+	background: $bright
+	@media screen and (min-width: $maxtablet) 
+		width: 55% 
+.top-filter .filter-box > div 
+	height: 50px
+	position: relative
+.top-filter .filter-box .right
+	@extend .inline-block-fix
+	display: inline-block
+	text-align: right
+	position: absolute
+	right: 0px
+	@media screen and (max-width: $maxmobile)
+		position: static
+.top-filter .filter-box .right > div
+	@extend .inline-block-fix
+	display: inline-block
+	position: relative
+.top-filter .filter-box .tag-search 
+	@extend .inline-block-fix
+	display: inline-block
+	margin-right: 10%
+.top-filter .filter-box .tag-search > a
+	display: inline-block
+	line-height: 50px
+	background: url(../img/search.png) no-repeat
+	padding: 0 0 0 40px
+	position: relative
+.top-filter .filter-box .tag-search a:after
+	+dropdown(0)
+	top: 23px
+.top-filter .filter-box .action-types	
+	@extend .inline-block-fix
+	display: inline-block
+	float: right
+	@media screen and (max-width: $maxmobile)
+		font-size: 13px
+		padding-left: 40px
+		float: none
+	margin-right: 28px
+	width: 100px
+.top-filter .filter-box .action-types > a
+	line-height: 50px
+	position: relative
+.top-filter .filter-box .action-types > a:after
+	+dropdown(0)
+.top-filter .filter-box .dates	
+	@extend .inline-block-fix
+	@media screen and (min-width: $maxmobile) 
+		display: block
+	@media screen and (max-width: $maxmobile)
+		font-size: 13px
+	float: right
+	margin-right: 28px
+	padding-left: 20px
+	border-left: 1px white solid
+.top-filter .filter-box .dates > a
+	line-height: 50px
+	position: relative
+.top-filter .filter-box .dates > a:after
+	+dropdown(0)
+.top-filter .login
+	position: relative
+	line-height: 50px
+.profile
+	position: relative
+.top-filter .login, .profile
+	@extend .inline-block-fix
+	display: inline-block
+	float: right
+	@media screen and (max-width: $maxtablet) 
+		position: absolute
+		top: 0
+		right: 0
+.profile nobr
+	line-height: 50px
+.top-filter .login > a
+	+dashed-link($underline-color)
+	position: relative
+.top-filter .login > a:before
+	content: ''
+	display: inline-block
+	background: url(../img/login.png) no-repeat
+	width: 9px
+	height: 13px
+	position: absolute
+	top: 0px
+	left: -12px
+.profile nobr
+	position: relative
+	overflow: hidden
+.fakelink
+	font-size: 14px
+	position: absolute
+	left: -1000px
+.profile nobr:before
+	+dropdown(0)
+	z-index: 2
+.profile .overnobr:after
+	position: absolute
+	content: ""
+	width: 1px
+	height: 1px
+	top: 13px
+	border-radius: 30px
+	background: #fff
+	box-shadow: 0px 1px 15px 15px white
+.profile nobr a
+	+dashed-link($underline-color)
+	vertical-align: middle
+	line-height: normal
+	display: inline-block
+	position: relative
+	overflow: hidden
+	@media screen and (max-width: $maxmobile) 
+		max-width: 100px
+	@media screen and (min-width: $maxmobile) 
+		max-width: 250px
+	@media screen and (min-width: $maxtablet) 
+		max-width: 145px
+.profile img
+	display: inline-block
+	vertical-align: top
+	margin: 0 0 0 16px
+	border-radius: 25px
+	z-index: 2
+	position: relative
+	width: 50px
+	height: 50px
+
+
+//главная - карта
+.main-map	
+	height: 320px
+	overflow: hidden
+
+//главная - нижний фильтр
+.bottom-filter
+	height: 50px
+	@media screen and (max-width: $maxmobile) 
+		height: 100px
+	background: $border-color
+.bottom-filter ul 
+	@extend .list-reset
+	@extend .inline-block-container-fix
+.bottom-filter ul li
+	@extend .inline-block-fix
+	display: inline-block
+	@media screen and (max-width: $maxmobile)
+		font-size: 13px
+	margin: 18px 20px 16px 20px
+.bottom-filter ul li a 
+	+dashed-link($underline-color)
+	position: relative
+	color: white	
+.bottom-filter ul li a:hover
+	color: $underline-color
+.bottom-filter ul li a:active
+	color: $orange-color
+	border-color: $orange-color
+.bottom-filter ul li a:after
+	+dropdown-white(0)
+.bottom-filter ul li.current a
+	+dashed-link($orange-color)
+	color: $orange-color
+.bottom-filter ul li.current a:after
+	+dropdown-orange(0)
+
+//главная - результаты поиска
+.results 
+	@extend .inline-block-container-fix
+	margin: 0 0 15px 0
+	position: relative
+.results .slider
+	padding: 10px 0
+.results .prevnext
+	z-index: 3
+	left: 0
+.results:before
+	content: ''
+	display: block
+	width: 100%
+	margin-bottom: -1.2em
+.results:after
+	content: ''
+	display: inline-block
+	width: 100%
+.event-preview
+	@extend .inline-block-fix
+	display: inline-block
+	vertical-align: top
+	position: relative
+	//top: 1.2em
+	border: 1px $bright solid
+	margin-bottom: 20px
+	margin-left: 10px!important
+	padding: 18px 22px 5px 22px
+	width: 220px
+	@media screen and (max-width: $maxtablet)
+		width: 180px 
+	@media screen and (max-width: $maxmobile)
+		width: 120px 
+.shadow
+	-webkit-box-shadow: 0 0 21px 0 rgba(0,0,0,0.26)
+	box-shadow: 0 0 21px 0 rgba(0,0,0,0.26)
+.smallshadow
+	-webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.26) !important
+	box-shadow: 0 0 10px 0 rgba(0,0,0,0.26) !important
+.event-preview:hover
+	cursor: pointer
+	@extend .shadow
+	padding-bottom: 19px
+.event-preview:hover h2 a, .event-preview:hover p
+	background: $orange-color
+	color: white 
+	display: inline-block
+.event-preview:hover h2 a
+	padding: 5px 6px 4px 6px
+	position: relative
+	top: -6px
+	left: -6px
+.event-preview:hover .type
+	padding: 0px 6px 4px 6px
+	position: relative
+	top: -8px
+	left: -6px
+.event-preview:hover dl
+	margin: 1px 0 0 0
+.event-preview h2 
+	font-size: 14px
+	font-weight: bold
+	padding: 0px
+	margin: 0px
+	text-align: left
+.event-preview .type
+	margin: 0
+	color: $minor-color
+	display: inline-block
+.event-preview dl dd a
+	+solid-link($underline-color)
+.event-preview dl dt 
+	float: left
+	width: 40px
+	color: $light-color
+	font-style: italic
+	font-size: 11px
+
+//
+.wide-banner
+	margin: 0 0 70px 0
+
+.wide-banner a img
+	display: block
+	width: 100%
+
+//главная - самое интересное
+.most-interesting
+	margin: -30px 0 60px 0
+.most-interesting .top-bar
+	margin: 0 0 20px 0
+	padding: 0 0 12px 0
+	border-bottom: 1px $bright solid
+	overflow: hidden
+.most-interesting .top-bar .date-filter
+	@media screen and (min-width: $maxmobile) 
+		float: left
+.most-interesting .top-bar .date-filter a
+	+solid-link($underline-color)
+.most-interesting .top-bar .cities-filter
+	@media screen and (min-width: $maxmobile) 
+		float: right
+
+.most-interesting .items
+	@extend .inline-block-container-fix
+	text-align: justify
+.most-interesting .items:before
+	content: ''
+	display: block
+	width: 100%
+	margin-bottom: -1.2em
+.most-interesting .items:after
+	content: ''
+	display: inline-block
+	width: 100%
+.most-interesting .items .item
+	@extend .inline-block-fix
+	display: inline-block
+	vertical-align: top
+	position: relative
+	top: 1.2em
+	width: 19%
+	padding: 10px 15px 10px 22px
+	@media screen and (max-width: $maxmobile) 
+		width: 38%
+	position: relative
+	font-size: 13px
+.most-interesting .items .item h2
+	text-transform: lowercase 
+	margin: 0 0 12px 0
+	@media screen and (min-width: $maxdesktop) 
+		margin: 0 0 24px 0
+	text-align: left
+.rss
+	width: 12px
+	height: 12px
+	background: url('../img/rss.png') no-repeat
+	display: inline-block
+	border: none !important
+.most-interesting .items .item .rss
+	@media screen and (min-width: $maxdesktop) 
+		display: none
+	background: url('../img/rss.png') no-repeat
+	position: absolute
+	@media screen and (min-width: $maxdesktop)
+		top: 10px
+		left: 20px
+	@media screen and (max-width: $maxtablet)
+		right: 10px
+		top: 15px 
+.most-interesting .items .item:hover .rss
+	display: block
+.category-icons
+	display: inline-block
+	height: 34px
+	width: 37px
+	background: url('../img/category-icons.png') no-repeat
+	margin: 0 0 0 10px
+	@media screen and (max-width: $maxtablet)
+		display: none 
+$category-icon-width: 39px
+.most-interesting .items .item .shopping
+	@extend .category-icons
+.most-interesting .items .item .concerts
+	@extend .category-icons
+	background-position: -$category-icon-width 0
+.most-interesting .items .item .dinners
+	@extend .category-icons
+	background-position: -2*$category-icon-width 0
+.most-interesting .items .item .islands
+	@extend .category-icons
+	background-position: -3*$category-icon-width 0
+.active-category-icon
+	background-position: 0 -34px !important
+.active-category-icon.concerts
+	background-position: -$category-icon-width -34px !important
+.active-category-icon.dinners
+	background-position: -2*$category-icon-width -34px !important
+.active-category-icon.islands
+	background-position: -3*$category-icon-width -34px !important
+.most-interesting .items .item ul
+	@extend .list-reset
+.most-interesting .items .item ul li
+	margin: 0 0 13px 0
+.most-interesting .items .item .date 
+	color: $brighter-color
+	display: inline-block
+.most-interesting .items .item p 
+	margin: 0
+.most-interesting .items .item
+	text-align: left
+.most-interesting .items .item .tags a
+	@extend .gray-tag
+.most-interesting .items .item .tags a:hover
+	@extend .blue-tag
+	color: white !important
+.most-interesting .items .item .tags a:active
+	background-color: $orange-color
+	background-position: 0 -24px
+.most-interesting .items .item .tags, .most-interesting .items .item .date 
+	@media screen and (min-width: $maxdesktop) 
+		display: none
+.most-interesting .items .item:hover .tags
+	display: block 
+.most-interesting .items .item:hover .date 
+	display: inline-block
+.most-interesting .items .item:hover a:hover
+	+solid-link($orange-color)
+	color: $orange-color
+.most-interesting .items .item:hover
+	@extend .shadow
+.most-interesting .items .item:hover a
+	+solid-link($underline-color)
+
+
+//свитчер
+.onoffswitch
+	position: relative
+	width: 40px
+	-webkit-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	display: inline-block
+	vertical-align: middle
+
+.onoffswitch .onoffswitch-checkbox
+	display: none
+
+.onoffswitch .onoffswitch-label
+	display: block
+	overflow: hidden
+	cursor: pointer
+	border: 2px solid #F2F2F2
+	border-radius: 10px
+
+.onoffswitch .onoffswitch-inner
+	width: 200%
+	margin-left: -100%
+	-moz-transition: margin 0.3s ease-in 0s
+	-webkit-transition: margin 0.3s ease-in 0s
+	-o-transition: margin 0.3s ease-in 0s
+	transition: margin 0.3s ease-in 0s
+	&:before, &:after
+		float: left
+		width: 50%
+		height: 20px
+		padding: 0
+		line-height: 20px
+		font-size: 14px
+		color: white
+		font-family: Trebuchet, Arial, sans-serif
+		font-weight: bold
+		-moz-box-sizing: border-box
+		-webkit-box-sizing: border-box
+		box-sizing: border-box
+	&:before
+		content: "I"
+		padding-left: 10px
+		background-color: $underline-color
+		color: #FFFFFF
+	&:after
+		content: ""
+		padding-right: 10px
+		background-color: #E8E8E8
+		color: #999999
+		text-align: right
+
+.onoffswitch .onoffswitch-switch
+	width: 14px
+	margin: 3px
+	background: #FFFFFF
+	border: 2px solid #F2F2F2
+	border-radius: 10px
+	position: absolute
+	top: 0
+	bottom: 0
+	right: 16px
+	-moz-transition: all 0.3s ease-in 0s
+	-webkit-transition: all 0.3s ease-in 0s
+	-o-transition: all 0.3s ease-in 0s
+	transition: all 0.3s ease-in 0s
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.20)
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.20)
+.ieswitch
+	display: inline-block 
+	.onoffswitch-label div 
+		display: none
+
+.onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label
+	.onoffswitch-inner
+		margin-left: 0
+	.onoffswitch-switch
+		right: 0px
+
+//футер
+.footer
+	border-top: 3px $border-color solid
+	font-size: 12px
+.footer .disclaimer
+	padding: 16px 0 19px 0
+	color: $minor-color
+	border-bottom: 1px $bright solid
+.footer .bottom
+	overflow: hidden
+	margin: 19px 0 30px 0 
+.footer .bottom .copyright
+	width: 24%
+	float: left
+	color: $minor-color
+.footer .bottom .copyright a
+	+solid-link($underline-color)
+.search-input
+	width: 100%
+	height: 30px
+	line-height: 30px
+	background: url('../img/search-small.png') no-repeat $bright 10px 9px
+	padding: 0 0 0 30px
+	border: none 
+	min-width: 120px
+.footer .bottom .search
+	float: left
+	width: 22%
+.footer .bottom .search input	
+	@extend .search-input
+.footer .bottom .counter 
+	@media screen and (max-width: $maxtablet)
+		display: none 
+	float: right
+	width: 16%
+	text-align: right
+.footer .bottom .social
+	float: right
+.footer .bottom .social a
+	display: inline-block
+	background: url('../img/social.png') no-repeat
+	width: 27px
+	height: 25px
+.footer .bottom .social .lj
+	background-position: -27px 0
+
+//журналистика
+.filter
+	padding: 25px 0 10px 0
+	border-bottom: 1px $bright solid
+	position: relative
+.filter > div > ul
+	@extend .list-reset
+	@extend .inline-block-container-fix
+.filter > div > ul > li
+	@extend .inline-block-fix
+	display: inline-block
+	position: relative
+.filter .left-bar
+	@extend .inline-block-fix
+	display: inline-block
+	@media screen and (min-width: $maxtablet)
+		margin-left: 22%
+		padding-left: 20px
+.filter .right-bar
+	position: absolute
+	right: 0
+	top: 25px
+	@media screen and (max-width: $maxtablet) 
+		position: static
+.filter a
+	position: relative
+	+dashed-link($underline-color)
+.filter a:active
+	+dashed-link($orange-color)
+.filter a:after
+	+dropdown(0)
+.filter .left-bar > ul > li
+	margin: 3px 40px 0 0
+	@media screen and (max-width: $maxmobile) 
+		margin: 3px 20px 0 0
+.filter .right-bar > ul li
+	margin: 0 0 0 30px 
+	@media screen and (max-width: $maxtablet)
+		margin: 0 20px 0 0 
+.filter .view
+	position: absolute
+	left: 0px 
+	top: 15px
+	@media screen and (max-width: $maxtablet)
+		position: static
+		margin-left: -10px
+.filter .view a
+	position: relative
+	border: none 
+.filter .view a span
+	+dashed-link($underline-color)
+.filter .view a:active span
+	+dashed-link($orange-color)
+.filter .view a:after
+	display: none
+.filter .view a:before
+	content: ''
+	display: inline-block
+	vertical-align: middle
+	width: 40px
+	height: 40px
+	background: url(../img/view.png) no-repeat
+.filter .view a:hover:before
+	background-position: 0 -40px
+.filter .view a:active:before
+	background-position: 0 -80px
+.filter .view a.to-table:before
+	background-position: -40px 0
+.filter .view a.to-table:hover:before
+	background-position: -40px -40px
+.filter .view a.to-table:active:before
+	background-position: -40px -80px
+.journal-list
+	margin: 0 0 40px 0
+	@extend .inline-block-container-fix
+.journal-list h1
+	@media screen and (min-width: $maxtablet)
+		margin: 20px 0 0 22%
+		padding: 0 0 0 20px
+.journal-list .authors
+	@extend .inline-block-fix
+	display: inline-block
+	width: 22%
+	margin: 20px 0 0 0
+	@media screen and (max-width: $maxtablet)
+		width: 100%
+		margin-left: 20px
+	vertical-align: top
+.journal-list .content-items
+	@extend .inline-block-fix
+	display: inline-block
+	width: 78%
+	@media screen and (max-width: $maxtablet)
+		width: 100%
+	vertical-align: top
+.journal-list .authors h2
+	margin: 10px 0 10px 0
+.journal-list .authors ul
+	@extend .list-reset
+	font-size: 13px
+	margin: 0 0 20px 0
+.journal-list .authors ul li
+	@media screen and (max-width: $maxtablet)
+		display: inline-block
+	margin: 0 0 10px 0
+.journal-list .authors a
+	+solid-link($underline-color)
+.journal-list .authors a:active
+	+solid-link($orange-color)
+	color: $orange-color
+.content-items .item 
+	padding: 5px 17px 5px 20px
+	overflow: hidden
+.content-items .item h2 a
+	@media screen and (max-width: $maxtablet)	
+		+solid-link($underline-color)
+.content-items .item p
+	margin: 0
+.content-items .item .shopping
+	@extend .category-icons
+.content-items .item .concerts
+	@extend .category-icons
+	background-position: -$category-icon-width 0
+.content-items .item .dinners
+	@extend .category-icons
+	background-position: -2*$category-icon-width 0
+.content-items .item .islands
+	@extend .category-icons
+	background-position: -3*$category-icon-width 0
+.content-items .item .misc
+	@media screen and (min-width: $maxdesktop)
+		display: none
+	margin: 0 0 15px 0
+.content-items .item .preview
+	padding: 0 6% 0 0
+	margin: 0 0 14px 0
+.content-items .item:hover
+	cursor: pointer
+	@extend .shadow
+.content-items .item:hover h2 a
+	+solid-link($underline-color)
+.content-items .item h2 a
+	@media screen and (max-width: $maxtablet)
+		+solid-link($underline-color)
+.content-items .item:hover .misc
+	display: block
+	overflow: hidden
+.content-items .item .tags
+	float: left
+.content-items .item .tags a
+	@extend .gray-tag
+.content-items .item .tags a:hover
+	@extend .blue-tag
+.content-items .item .tags a:active
+	@extend .orange-tag
+.content-items .item .lcomments
+	float: right
+.lcomments a
+	display: inline-block
+	padding: 0 0 0 20px
+	margin: 0 0 0 12px
+	color: $minor-color
+	background: url(../img/lcomments.png) no-repeat 0 2px
+.lcomments a.likes
+	background-position: 0 -14px
+.lcomments a.comments:hover
+	background-position: 0 -29px
+.lcomments a.likes:hover, 
+.lcomments a.liked
+	background-position: 0 -44px
+.lcomments a.comments:active
+	background-position: 0 -59px
+.lcomments a.likes:active
+	background-position: 0 -44px
+.content-items .item .date 
+	color: $minor-color
+	@media screen and (max-width: $maxtablet)
+		display: none
+.content-items .item:hover .date 
+	display: inline-block
+
+//Журналистика - статья
+.journal-article
+	margin: 20px 0 40px 0
+	overflow: hidden
+.article
+	width: 70%
+	float: left
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+.article h1
+	margin: 0 0 25px 0
+.article h1 a
+	+solid-link($underline-color)
+.article h1 a:active
+	+solid-link($orange-color)
+.article .author
+	margin: 0 0 10px 0
+.article .author a
+	+solid-link($underline-color)
+.article .author a:hover
+	color: $underline-color
+.article .author a:active
+	+solid-link($orange-color)
+	color: $orange-color
+.article .author .date
+	color: $minor-color
+.article .content p
+	margin: 0 0 15px 0
+	font-size: 13px
+.article .tags
+	margin: -10px 0 20px 0
+.article .tags a
+	@extend .gray-tag
+.article .tags a:hover
+	@extend .blue-tag
+	color: white !important
+.article .tags a:active
+	background-color: $orange-color
+	background-position: 0 -24px
+.article .sharing
+	border-top: 1px $bright solid
+	padding: 9px 0 0 0
+	margin: 0 0 25px 0
+	overflow: hidden
+.article .sharing .social
+	float: left
+.article .sharing .lcomments
+	float: right
+.article .comments .item
+	margin: 0 0 34px 0
+	font-size: 13px
+.article .comments h2
+	margin: 0 0 13px 0
+.article .comments h3
+	margin: 0 0 8px 0
+.button
+	padding: 0 20px
+	font-family: Arial
+	font-weight: bold
+	color: #fff
+	background-color: $orange-color 
+	height: 50px
+	line-height: 50px
+	border: none
+.button:hover
+	background-color: $underline-color
+	color: white
+.button:active
+	background-color: $main-color
+	color: white
+.comments textarea
+	@extend .boxsizing-border
+	width: 100%
+	height: 100px
+.comments .form-bottom
+	overflow: hidden
+.comments .form-bottom .submit
+	margin: 10px 0 0 0
+	padding: 0 20px
+	float: right
+	@extend .button
+.journal-article .right-bar
+	width: 25%
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+	float: right
+	@media screen and (min-width: $maxmobile)
+		margin: 50px 0 0 0
+	@extend .also
+.also
+	font-size: 13px
+.also h2
+	margin: 0 0 18px 0
+.also ul 
+	@extend .list-reset
+.also ul li
+	margin: 0 16px 16px 0
+.also  .date
+	color: $brighter-color
+
+
+//Карта
+.map-page .footer
+	border: none
+	margin: 10px 0 15px 0
+	padding: 0
+.map-page .header
+	margin: -20px 0 11px 0
+	padding: 11px 0 10px 0
+	border-bottom: 1px $bright solid
+	position: relative
+.map-page .header .left-bar
+	display: inline-block
+	width: 40%
+	@extend .inline-block-container-fix
+	padding: 5px 0 0 0
+.map-page .header .left-bar > a
+	@extend .inline-block-fix
+	display: inline-block
+	vertical-align: bottom
+.map-page .header .to-other-pages
+	@extend .inline-block-fix
+	display: inline-block
+	vertical-align: bottom
+	margin: 0 10px 0 0
+.map-page .header .to-other-pages a
+	font-size: 18px 
+	+solid-link($underline-color)
+.map-page .header .to-other-pages a:active
+	color: $orange-color
+	+solid-link($orange-color)
+.map-page .header .logo
+	width: 123px
+	height: 29px
+	background: url(../img/logo.png) no-repeat
+	margin: 0 19px 0 0
+.map-page .header .city
+	@extend .inline-block-fix
+	display: inline-block
+	vertical-align: bottom
+	position: relative
+	margin: 0
+	top: 0
+.map-page .profile .noshadow
+	width: 100% !important
+	left: -10px !important
+	height: 6px !important
+	bottom: -6px !important
+.map-page .header .city a
+	+dashed-link($underline-color)
+	position: relative
+.map-page .header .city a:after
+	+dropdown(0)
+.map-page .header .right-bar
+	position: absolute
+	right: 0
+	top: 3px
+	width: 60%
+	@extend .inline-block-container-fix
+	text-align: right
+.map-page .header .profile
+	float: none
+	position: relative
+.map-page .header .profile a
+	max-width: 300px
+	@media screen and (max-width: $maxtablet)
+		max-width: 100px
+.map-page .header .new-action
+	@media screen and (max-width: $maxtablet)
+		margin-bottom: 5px
+		margin-right: 4px
+
+.map-page .map-filter
+	margin: 0 0 11px 0
+	position: relative
+.map-page .map-filter .date-filter
+	@media screen and (min-width: $maxmobile) 
+		display: inline-block
+.map-page .map-filter .date-filter a
+	+dashed-link($underline-color)
+	position: relative
+	margin: 0 30px 0 0
+.map-page .map-filter .date-filter > ul
+	@extend .list-reset
+.map-page .map-filter .date-filter > ul > li
+	display: inline-block
+	position: relative
+.map-page .map-filter .date-filter a:after
+	+dropdown(0)
+.map-page .map-filter .cities-filter
+	@media screen and (min-width: $maxmobile) 
+		position: absolute
+		right: 0px
+		top: 0px
+.map-page .map
+	width: 100%
+	height: 650px
+	position: relative
+.map-page .map .overlay-example
+	@extend .event-preview
+	position: absolute
+	left: 300px
+	top: 100px
+	z-index: 10000
+	background: white
+	@extend .shadow
+
+//Мероприятия
+.events-list
+	@extend .inline-block-container-fix
+	margin: 0 0 20px 0
+	padding: 20px 0 0 0
+.events-list .left-bar
+	@extend .inline-block-fix
+	display: inline-block
+	width: 22%
+	margin-top: 20px
+	font-size: 13px
+	@media screen and (max-width: $maxtablet)
+		width: 100%
+.events-list .content-items
+	margin-top: -10px
+	@extend .inline-block-fix
+	display: inline-block
+	width: 78%
+	font-size: 13px
+	@media screen and (max-width: $maxtablet)
+		width: 100%
+	vertical-align: top
+.events-list .content-items h2
+	margin-bottom: 11px
+.events-list .content-items .date
+	display: block
+	color: $main-color
+.content-items .title
+	color: $orange-color
+	margin: 30px 0 8px 20px
+	font-size: 14px
+	position: relative
+.content-items .group-separator
+	@extend .title
+	margin-top: 10px 
+.content-items .title:before
+	display: block
+	content: ''
+	position: absolute
+	top: 50%
+	border-bottom: 1px $bright solid
+	width: 100%
+	z-index: -1
+.content-items .title span
+	background: white
+	padding-right: 11px
+.events-list .left-bar a
+	+solid-link($underline-color)
+.events-list .left-bar a:active
+	+solid-link($orange-color)
+.events-list .left-bar .current > a
+	color: $orange-color
+	border: none
+.events-list .left-bar .current > a:hover
+	color: $underline-color
+.events-list .left-bar .current > a:active
+	color: $main-color
+.events-list .left-bar ul
+	@extend .list-reset
+.events-list .left-bar ul ul
+	margin: 10px 0 0 20px
+.events-list .left-bar ul li
+	margin: 0 0 10px 0
+	@media screen and (max-width: $maxtablet)
+		padding: 0 0 5px 0
+.events-list .left-bar > ul  li
+	@media screen and (max-width: $maxtablet)
+		display: inline-block
+		vertical-align: top
+		padding-right: 10px
+		overflow: hidden
+.events-list .left-bar ul li ul
+	@media screen and (max-width: $maxtablet)
+		margin-left: 0px
+.events-list .active h2 span
+	@extend .active-category-icon
+.events-list .for-free h2 span
+	margin-left: 80px !important
+	position: relative
+.events-list .for-free h2 span:before
+	display: inline-block
+	content: 'бесплатно'
+	text-transform: uppercase
+	font-size: 9px
+	font-weight: bold
+	color: white
+	background: #86c16a
+	height: 13px
+	line-height: 13px
+	width: 62px
+	text-align: center
+	position: absolute
+	left: -73px
+	bottom: 0px
+.events-list .active 
+	border: 2px $orange-color solid
+	margin-left: 20px
+	margin-bottom: 20px !important
+	margin-top: 10px 
+.events-list .active .misc
+	@media screen and (max-width: $maxtablet)
+		overflow: hidden
+.events-list .active h2 a, .events-list .active .date, .events-list .active .preview 	
+	color: $orange-color !important
+.filter .rss:after
+	display: none
+.filter h1
+	font-size: 18px
+.filter .rss
+	margin-left: 6px
+
+//Шкала мероприятий
+.events-scale 
+	overflow: hidden
+	position: relative
+	font-size: 13px
+	margin: 30px 0 0 0
+.events-scale .events-slider
+	padding: 0 0 40px 0
+.events-scale .backlight
+	background: $orange-color
+	position: absolute
+	left: 0px
+	top: 6px
+	width: 200px
+	height: 30px
+	display: none
+.events-scale .period
+	position: absolute
+	bottom: -45px
+	left: 0px
+	padding: 9px 10px
+	height: 15px
+	z-index: 3
+	background: $orange-color
+	color: white
+	font-weight: bold
+	font-size: 1.2em
+	width: auto
+	display: none
+.events-scale a:hover .period
+	display: block
+.events-scale .cols
+	@extend .list-reset
+	position: relative
+.events-scale .cols li p.current
+	color: white !important
+.events-scale .cols > li
+	display: table-cell !important
+	width: 130px
+	min-width: 130px
+	padding-left: 10px
+	float: none !important
+.events-scale .cols .now
+	border-left: 1px $orange-color dashed
+	z-index: -1
+	position: absolute
+	display: block
+	left: 0px
+	top: 0px
+	display: none
+.events-scale .cols ul
+	@extend .list-reset
+.events-scale .cols .before
+	@extend .transparent
+.events-scale .date
+	color: $minor-color
+.events-scale .events li
+	margin: 0 0 10px 0
+.events-scale .events li a
+	display: block
+	width: 108px
+	padding: 9px 10px
+	border: 1px $bright solid
+	position: absolute
+	background: white
+	//z-index: 2
+.events-scale .events li a:hover
+	color: $main-color
+	@extend .shadow
+.events-scale .events li a:hover span
+	+solid-link($underline-color)
+.events-scale .events li a:active 
+	color: $orange-color
+.events-scale .events li a:active span
+	+solid-link($orange-color)
+.events-scale .events li.active a
+	width: 106px
+	padding: 8px 9px
+	border: 2px $orange-color solid
+.events-scale .events .exhibition
+	//position: absolute
+	//bottom: 0
+
+//Слайдер шкалы мероприятий
+.events-scale .prevnext span
+	bottom: auto
+	top: 100px
+.prevnext
+	position: absolute
+	display: block
+	height: 100%
+	width: 60px
+	background: url('../img/prevnext-shadows.png') repeat-y
+	top: 0
+	@media screen and (max-width: $maxtablet)
+		width: 30px
+.prevBtn
+	background-position: -60px 0
+.nextBtn
+	left: auto !important
+	right: 0
+.prevnext:before, .prevnext span 
+	display: block
+	width: 20px
+	height: 33px
+	position: absolute
+	left: 0px
+	bottom: 50%
+	margin-bottom: -17px
+	background: url('../img/prevnext.png') no-repeat
+	content: ''
+.prevBtn:before, .prevBtn span 
+	background-position: -21px 0
+.nextBtn:before, .nextBtn span 
+	left: inherit
+	right: 0px !important
+.prevnext:hover:before, .prevnext:hover span 
+	background-position: 0 -34px
+.prevBtn:hover:before, .prevBtn:hover span 
+	background-position: -21px -34px
+.prevnext:active:before, .prevnext:active span 
+	background-position: 0 -68px
+.prevBtn:active:before, .prevBtn:active span 
+	background-position: -21px -68px
+.events-scale .prevnext:before
+	display: none
+.events-scale
+	position: relative
+
+//Мероприятие
+.event
+	margin: 20px 0 40px 0
+	overflow: hidden
+.event .right-bar
+	width: 25%
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+	float: right
+	@extend .also
+.float-fix
+	overflow: hidden
+	@media screen and (max-width: $maxmobile)
+		overflow: auto
+.event h1 
+	margin: 0 0 28px 0
+.event h1 .shopping
+	@extend .category-icons
+.event h1 .concerts
+	@extend .category-icons
+	background-position: -$category-icon-width 0
+.event h1 .dinners
+	@extend .category-icons
+	background-position: -2*$category-icon-width 0
+.event h1 .islands
+	@extend .category-icons
+	background-position: -3*$category-icon-width 0
+.event .extra .sharing
+	border-bottom: 1px $bright solid
+	border-top: none
+	padding-bottom: 10px
+	margin-bottom: 38px
+.event .tags
+	border-bottom: 1px $bright solid
+	padding-bottom: 20px
+	margin-bottom: 9px !important
+.event .info
+	@extend .article
+	margin: 0 0 40px 0
+.event .extra
+	@extend .article
+.event .invitation .button
+	display: inline-block
+	float: right
+	vertical-align: middle
+	@media screen and (max-width: 730px)
+		float: none
+		margin-top: 20px 
+
+.event .invitation .invite
+	display: inline-block
+	margin-top: 15px
+	@media screen and (max-width: 730px)
+		display: block
+.event .map
+	height: 350px
+.event .when
+	margin: 0 0 25px 0
+.event .when p
+	margin: 0
+.event .when .date
+	font-size: 18px
+	color: $orange-color
+.event .when .time
+	font-size: 18px
+	text-transform: lowercase
+.event .for-free:before
+	display: inline-block
+	color: white
+	background: #86c16a
+	text-transform: uppercase
+	line-height: 13px
+	height: 13px
+	padding: 0 3px
+	content: 'бесплатно'
+	font-size: 9px
+	font-weight: bold
+	margin-top: 5px
+.event .where
+	margin: 0 0 20px 0
+.event .where .logo img
+	max-height: 40px
+.event .where .logo
+	border: none !important
+.event .where p
+	margin: 0
+.event .where a
+	+solid-link($underline-color)
+.event .where a:active
+	+solid-link($orange-color)
+.event .terms
+	margin: 0 0 50px 0
+.event .price
+	font-weight: bold
+	margin: 0 0 10px 0
+	span
+		color: white
+		background: #86c16a
+		text-transform: uppercase
+		line-height: 18px
+		height: 18px
+		padding: 0 5px
+		font-weight: bold
+		display: inline-block
+	
+//Устранитель
+.organazer
+	margin: 20px 0 40px 0
+	overflow: hidden
+.organazer .right-bar
+	width: 25%
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+	float: right
+	@extend .also
+.organazer h1
+	margin: 0 0 15px 0
+.organazer h1 img
+	display: inline-block
+	vertical-align: bottom 
+	max-height: 40px
+	margin: 0 10px 0 0
+.organazer .info
+	@extend .article
+	margin-bottom: 20px
+.organazer .contacts
+	font-size: 13px
+	padding: 15px 0
+	border-top: 1px $bright solid
+.organazer .contacts a
+	+solid-link($underline-color)
+.organazer .contacts a:active
+	+solid-link($orange-color)
+.organazer .contacts p
+	margin: 0
+.organazer .map
+	height: 350px
+.organazer .sharing
+	border-bottom: 1px $bright solid
+	padding-bottom: 10px !important
+	margin-bottom: 40px !important
+.organazer .right-bar .title
+	font-size: 14px
+	color: $orange-color
+	margin-top: 40px
+	position: relative
+.organazer .right-bar .title span
+	display: inline-block
+	background: white
+	padding-right: 10px
+.organazer .right-bar .title:before
+	display: block
+	content: ''
+	position: absolute
+	top: 50%
+	border-bottom: 1px $bright solid
+	width: 100%
+	z-index: -1
+.organazer .right-bar .lcomments
+	margin: 7px 0 0 0
+	@media screen and (min-width: $maxtablet)
+		display: none
+	@media screen and (max-width: $maxmobile)
+		margin: 12px 0 0 0
+.organazer .right-bar .lcomments .likes
+	@media screen and (max-width: $maxmobile)
+		float: right
+.organazer .right-bar .lcomments a
+	border: none !important
+.also li a
+	@media screen and (max-width: $maxtablet)
+		+solid-link($underline-color)
+.organazer .right-bar .finished
+	margin: 0 0 40px 0
+.organazer .right-bar .finished li:hover
+	cursor: pointer
+	@extend .shadow
+	padding: 10px
+	@media screen and (max-width: $maxmobile)
+		box-shadow: none
+		padding: 0
+.organazer .right-bar .finished li:hover .lcomments
+	display: block
+.organazer .right-bar .finished li:hover a
+	+solid-link($underline-color)
+.organazer .right-bar .finished li a:active
+	+solid-link($orange-color)
+.personal h1 img 
+	height: 50px
+	max-height: 50px
+	border-radius: 25px
+	vertical-align: middle
+.personal .sharing
+	border-bottom: none !important
+
+//Новое
+.fresh-list
+	@extend .inline-block-container-fix
+	margin: 0 0 20px 0
+	padding: 20px 0 0 24%
+	@media screen and (max-width: $maxmobile)
+		padding-left: 0
+.fresh-list .content-items
+	margin-top: -10px
+	@extend .inline-block-fix
+	display: inline-block
+	font-size: 13px
+	width: 100%
+	vertical-align: top
+.fresh-list .content-items h2
+	margin-bottom: 11px
+.fresh-list .content-items .date
+	display: block
+	color: $main-color
+
+//Места и люди
+.placespeople
+	margin-top: 5px
+.placespeople h2 a 
+	text-transform: none !important
+.placespeople .item ul li
+	position: relative
+.placespeople .item .logo
+	position: absolute
+	width: 40px
+	left: 0px
+	top: 0px
+	@media screen and (max-width: $maxmobile) 
+		position: inherit
+		text-align: center
+		width: 100%
+.placespeople .item .logo img
+	width: 40px
+.placespeople .item .info
+	margin-left: 50px
+	font-size: 13px
+	@media screen and (max-width: $maxmobile) 
+		margin-left: 0px
+.placespeople .item .info .about
+	color: $brighter-color
+.placespeople .item .info .link a
+	color: $gray-color
+.placespeople .item .info .about, .placespeople .item .info .link
+	@media screen and (min-width: $maxdesktop) 
+		display: none
+.placespeople .item:hover .info .about, .placespeople .item:hover .info .link
+	display: block
+.placespeople .item .active
+	border: 2px $orange-color solid
+	padding: 5px
+.placespeople .item .active .logo
+	left: 5px
+	top: 5px
+
+//Личный кабинет
+.lk-nav .nav
+	display: inline-block
+	height: 40px
+	padding: 10px 4% 0 10px
+	background: $bright
+	margin: 0 20px 0 0
+	overflow: hidden
+	@media screen and (max-width: $maxtablet) 
+		margin-bottom: 10px
+		display: block
+		margin-right: 0px
+	@media screen and (max-width: $maxmobile) 
+		height: auto
+		padding: 10px 
+.lk-nav .nav ul
+	@extend .list-reset
+	@extend .inline-block-container-fix
+.lk-nav .nav ul li 
+	@extend .inline-block-fix
+	display: inline-block
+	@media screen and (max-width: $maxmobile) 
+		display: block
+.lk-nav .nav ul li a
+	display: inline-block
+	padding: 7px 20px 0 20px
+	height: 33px
+	@media screen and (max-width: $maxtablet) 
+		display: block
+	@media screen and (max-width: $maxmobile) 
+		height: auto
+		padding: 15px 20px 15px 20px
+.lk-nav .nav ul li a span
+	+solid-link($underline-color)
+.lk-nav .nav .current a
+	background: white
+	@extend .shadow
+.lk-nav .nav .current a span
+	border: none !important
+.lk-nav .nav a:active span
+	+solid-link($orange-color)
+.lk-nav .new-action a
+	background-image: none
+	padding: 0 19px !important
+.lk-nav .profile 
+	@media screen and (max-width: $maxtablet) 
+		position: inherit
+		float: right
+.lk-nav .profile a
+	@media screen and (max-width: $maxmobile) 
+		max-width: 100px
+	@media screen and (min-width: $maxmobile) 
+		max-width: 250px
+	@media screen and (min-width: $maxtablet) 
+		max-width: 145px
+.nomenu .profile 
+	position: absolute
+	right: 0
+	top: 0
+	z-index: 2
+
+.lk-nav h1
+	display: inline-block
+	margin: 0
+	font-size: 18px
+	margin-top: 15px
+
+.lk
+	margin: 0 0 50px 0
+.lk h2
+	margin: 0 0 18px 0 
+.lk-list
+	@extend .inline-block-fix
+	display: inline-block
+	font-size: 13px
+	vertical-align: top
+.lk-list a
+	+solid-link($underline-color)
+.lk-list .list
+	color: $minor-color
+	display: inline-block
+	vertical-align: top
+	margin: 0 20px 0 0
+	max-width: 50%
+	@media screen and (max-width: $maxmobile) 
+		max-width: 100%
+.lk-list .list .bordered
+	border-bottom: 1px $bright solid
+.lk-list .list ul
+	@extend .list-reset
+	padding: 5px 0
+.lk-list .list ul li
+	margin: 0 0 5px 0
+.lk-list .list ul li span
+	color: $orange-color
+	font-weight: bold
+.lk-list h3
+	color: $orange-color
+	font-size: 14px
+	border-bottom: 1px $bright solid
+	margin: 0 0 13px 0
+.lk p
+	font-size: 13px
+	max-width: 660px
+.lk .container
+	@extend .inline-block-container-fix
+	margin: 0 0 40px 0
+.lk .added
+	@extend .lk-list
+	width: 24%
+	@media screen and (max-width: $maxmobile) 
+		width: 100%
+.lk .added .list
+	display: block !important
+	max-width: 100%
+.lk .updates
+	@extend .lk-list
+	width: 76%
+	@media screen and (max-width: $maxmobile) 
+		width: 100%
+.lk .category-filter
+	@extend .list-reset
+	@extend .inline-block-container-fix
+	text-align: justify
+	margin-bottom: 1em
+.lk .category-filter:before
+	content: ''
+	display: block
+	width: 100%
+	margin-bottom: -1.2em
+.lk .category-filter:after
+	content: ''
+	display: inline-block
+	width: 100%
+.lk .category-filter li
+	@extend .inline-block-fix
+	display: inline-block
+	width: 22%
+	@media screen and (max-width: $maxtablet)
+		width: 48% 
+	@media screen and (max-width: $maxmobile)
+		width: 100% 
+	border-bottom: 1px $bright solid
+	border-top: 1px $bright solid
+	margin-top: -1px
+	position: relative
+.lk .category-filter li .onoffswitch
+	position: absolute
+	right: 0px
+	top: 10px
+.lk .category-filter li .textlabel
+	line-height: 24px
+	display: block
+	padding: 10px 0
+
+//Личный кабинет - анонсы
+.lk-list-bar 
+	@extend .inline-block-fix
+	width: 22%
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+	margin: 0 0 20px 0
+.lk-list-bar h2
+	margin: 0 0 12px 0 !important
+.lk-list-bar ul
+	margin: 0 0 
+.lk-list-bar ul li
+	margin: 0 0 8px 0 !important
+
+.lk-columns
+	@extend .inline-block-container-fix
+.lk-columns .added
+	@extend .lk-list-bar
+.lk-columns .content-items
+	width: 78%
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+	@extend .inline-block-fix
+	display: inline-block
+
+.announcements
+	@extend .lk-columns
+
+.lk .top-bar
+	overflow: hidden
+	padding: 0 0 10px 0
+	border-bottom: 1px $bright solid
+	margin: 0 0 20px 20px
+	@media screen and (max-width: $maxmobile)
+		margin-left: 0
+.lk .top-bar h1
+	display: inline-block
+	margin: 0
+	font-size: 18px
+.lk .top-bar .right
+	float: right
+	margin: 5px 0 0 0
+	@media screen and (max-width: $maxmobile)
+		float: none
+.lk .top-bar .right a
+	+dashed-link($underline-color)
+	position: relative
+	display: inline-block
+	margin: 0 20px 0 0
+.lk .top-bar .right a:active
+	+dashed-link($orange-color)
+.lk .top-bar .right a:after
+	+dropdown(0)	
+.lk .content-items .item
+	font-size: 13px
+	position: relative
+	@media screen and (max-width: $maxmobile)
+		padding-left: 0px
+.lk .content-items .item h2
+	margin: 20px 0 10px 0
+.lk .content-items .item .date
+	color: $main-color
+	@media screen and (max-width: $maxtablet)
+		display: block
+.lk .content-items .item .preview
+	padding-right: 80px 
+.lk .content-items .item .removed
+	color: #ff0000
+.lk .content-items .item .published
+	color: #86c06a
+.lk .content-items .item .moderated
+	color: #f9b256
+.lk .content-items .misc
+	position: absolute
+	right: 20px
+	bottom: 0
+.lk .content-items .misc a
+	display: inline-block
+	margin-left: 5px
+	background: url('../img/editcontrols.png') no-repeat
+	width: 16px
+	height: 16px
+	@media screen and (max-width: $maxtablet)
+		width: 33px
+		height: 33px
+		background-position: 3px -52px
+.lk .content-items .misc .delete
+	background-position: -16px 0
+	@media screen and (max-width: $maxtablet)
+		background-position: -31px -52px
+.lk .content-items .misc a:hover
+	background-position: 0 -17px
+.lk .content-items .misc a:active
+	background-position: 0 -35px
+.lk .content-items .misc .delete:hover
+	background-position: -16px -17px
+.lk .content-items .misc .delete:active
+	background-position: -16px -35px
+
+.calendar 
+	@extend .lk-columns
+
+.templates
+	@extend .lk-columns
+.templates .template-list
+	@extend .list-reset
+	margin: 0 0 0 20px
+.templates .template-list li
+	margin: 0 0 10px 0
+.templates .template-list a
+	font-size: 18px
+	+solid-link($underline-color)
+
+.form p
+	font-size: 14px !important
+	max-width: 1000px
+.form .textinput
+	height: 30px
+	border: none
+	line-height: 30px
+	padding: 0 10px
+	display: block
+	width: 100%
+	background: $bright
+	@extend .boxsizing-border
+.form textarea
+	border: none
+	display: block
+	width: 100%
+	background: $bright
+	height: 120px
+	padding: 10px
+	@extend .boxsizing-border
+.form .tags
+	color: $minor-color
+.form .tags input
+	display: none	
+.form .tags label
+	@extend .gray-tag
+.form .tags label:hover
+	@extend .blue-tag
+.form .tags label:active
+	@extend .orange-tag
+.form .tags input:checked+label
+	@extend .blue-tag
+.form .tags input:checked+label:active
+	@extend .orange-tag
+.form .dropdown-link
+	position: relative
+	margin: 14px 0
+.form .dropdown-link a
+	+dashed-link($underline-color)
+	position: relative
+.form .dropdown-link a:after
+	+dropdown(0)
+.form .bottom
+	position: relative
+	padding-top: 25px
+	border-top: 1px $bright solid
+	height: 70px
+.form .bottom button
+	@extend .button
+	position: absolute
+	top: 10px
+	right: 0px
+.form h2
+	margin: 0
+.form .fileinput
+	margin-left: -410px
+	-moz-opacity: 0
+	filter: alpha(opacity=0)
+	opacity: 0
+	font-size: 150px
+	height: 29px
+	position: absolute
+	top: 0px
+	z-index: 2
+.form .photo
+	position: relative
+	height: 30px
+	overflow: hidden
+	line-height: 30px
+	padding: 0 10px
+	background: $bright
+	color: $minor-color
+.form .photo:after
+	content: ''
+	display: block
+	position: absolute
+	width: 16px
+	height: 13px
+	background: url(../img/inputs.png) no-repeat 0 -1px
+	right: 10px
+	top: 9px
+.form .photo:hover:after
+	background-position: 0 -16px
+.form .photo #name
+	display: inline
+	color: $main-color
+.form .short textarea
+	height: 80px
+.form section
+	margin: 0 0 50px 0
+.form .date
+	@extend .inline-block-container-fix
+.form .dateinput
+	@extend .inline-block-fix
+	display: inline-block
+	position: relative
+	width: 48%
+.form .wide .dateinput
+	width: 100%
+.form .dateinput:after
+	content: ''
+	display: block
+	position: absolute
+	width: 15px
+	height: 15px
+	background: url(../img/inputs.png) no-repeat -31px 0
+	right: 10px
+	top: 8px
+.form .dateinput:hover:after
+	background-position: -31px -15px
+.form .new-date
+	@extend .inline-block-fix
+	display: inline-block
+	width: 48%
+	margin-left: 4%
+.form .new-date a
+	+dashed-link($underline-color)
+.form .time
+	@extend .inline-block-container-fix
+.form .time .timeinput
+	@extend .inline-block-fix
+	display: inline-block
+	position: relative
+	width: 48%
+	vertical-align: middle
+.form .time .separator
+	@extend .inline-block-fix
+	display: inline-block
+	text-align: center
+	color: $minor-color !important
+	width: 4%
+	position: relative
+	vertical-align: middle
+.form .time .timeinput:after
+	content: ''
+	display: block
+	position: absolute
+	width: 15px
+	height: 15px
+	background: url(../img/inputs.png) no-repeat -16px 0
+	right: 11px
+	top: 8px
+.form .time .timeinput:hover:after
+	background-position: -16px -15px
+
+.new-smth 
+	@extend .inline-block-container-fix
+	position: relative
+.new-smth .form
+	width: 49%
+	@extend .inline-block-fix
+	display: inline-block
+	@media screen and (max-width: $maxtablet)
+		width: 64%
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+.new-smth .additional
+	width: 50%
+	@extend .inline-block-fix
+	display: inline-block
+	@media screen and (max-width: $maxtablet)
+		width: 36%
+	@media screen and (max-width: $maxmobile)
+		width: 100%
+.new-smth .to-full-form 
+	position: absolute
+	top: 120px
+	right: 25%
+	margin-right: -70px
+	@media screen and (max-width: $maxtablet)
+		right: 13%
+	@media screen and (max-width: $maxmobile)
+		position: inherit
+		margin: 0 auto
+.new-smth .to-full-form a
+	display: block
+	width: 120px
+	padding: 45px 10px 10px 10px
+	text-align: center
+	margin: 0 auto
+	@media screen and (max-width: $maxmobile)
+		margin-top: 0
+	position: relative
+.new-smth .to-full-form a:before
+	content: ''
+	display: block
+	position: absolute
+	top: 20px
+	left: 50%
+	margin-left: -8px
+	width: 16px
+	height: 13px
+	background: url(../img/feather.png) no-repeat 
+.new-smth .to-full-form a:hover:before
+	background-position: 0 -13px
+.new-smth .to-full-form a:active:before
+	background-position: 0 -26px
+.new-smth .to-full-form a span
+	+solid-link($underline-color)
+.new-smth .to-full-form a:active span
+	+solid-link($orange-color)
+	
+.lk-nav p
+	font-size: 14px
+	margin: 8px 0 0 0
+.lk-nav p a
+	+dashed-link($underline-color)
+	position: relative
+.lk-nav p a:active
+	+dashed-link($orange-color)
+.lk-nav p a:after
+	+dropdown(0)
+
+.lk .rules
+	margin: 0 0 0 20px
+	@media screen and (max-width: $maxmobile)
+		margin: 0
+.lk .rules ol, .lk .rules p, .lk .rules a
+	color: $minor-color
+	font-size: 13px
+.lk .rules h2
+	margin: 0 0 50px 0
+	@media screen and (max-width: $maxmobile)
+		margin: 0 0 20px 0
+.lk .rules ol
+	list-style-position: inside
+	margin: 0
+	padding: 0
+.lk .rules ol li, .lk .rules p
+	margin: 0 0 18px 0
+.lk .additional .content-items
+	margin-left: 20px
+.lk .additional .content-items .item h2
+	margin-top: 0 !important
+.lk .additional .content-items .title
+	@media screen and (max-width: $maxmobile)
+		margin-left: 0px
+
+.dropdown-list
+	@extend .list-reset
+	@extend .inline-block-fix
+	text-align: left !important
+	position: absolute
+	z-index: 1000
+	top: 50px
+	left: -10px
+	padding: 0 10px 10px 10px
+	@extend .shadow
+	display: none
+	background: white
+	li
+		margin: 0 0 10px 0
+		a
+			+solid-link($underline-color)
+		a:active
+			+solid-link($orange-color)
+		a:after
+			display: none
+=noshadow($color)
+	display: none
+	width: 200%
+	position: absolute
+	left: 0px 
+	bottom: 0px
+	height: 15px
+	background: $color
+	z-index: 1001
+.noshadow
+	+noshadow($bright)
+
+.top-filter .dropdown-list, .top-filter .dropdown-list:before
+	background: $bright
+.top-filter .tag-search .dropdown-list
+	left: 0px
+	width: 160px
+	padding-left: 40px
+.top-filter .dates .dropdown-list
+	padding-left: 20px
+	width: 165px
+	left: auto
+	right: -28px
+.top-filter .dates .noshadow
+	left: auto
+	right: -28px
+.top-filter .action-types .dropdown-list
+	left: auto
+	right: -26px
+	width: 100px
+.top-filter .action-types .noshadow
+	left: auto
+	right: -29px
+
+.login .form
+	//display: none
+	position: absolute
+	z-index: 1000
+	top: 0px 
+	right: 0px 
+	width: 300px
+	background: white
+	padding: 20px 
+	@extend .shadow
+.login .form a
+	display: inline-block
+	line-height: initial
+	+dashed-link($underline-color)
+	margin: 0 10px 0 0
+.login .form a.current
+	background: $orange-color
+	color: white
+	padding: 2px 5px
+	border: none
+.login .form .close
+	position: absolute
+	right: 10px
+	top: 10px
+.login .social
+	line-height: normal
+.login .social ul
+	@extend .list-reset
+	@extend .inline-block-container-fix
+.login .social ul li
+	@extend .inline-block-fix
+	display: inline-block
+.login .social ul li a
+	border: none
+
+.close
+	display: block
+	position: absolute
+	width: 32px
+	height: 32px
+	background: url(../img/close.png) no-repeat
+	border: none !important
+.close:hover
+	background-position: 0 -32px
+.close:active
+	background-position: 0 -64px
+
+.header .noshadow
+	background: white
+	bottom: -16px
+	left: -10px
+	width: 170px
+.header .dropdown-list	
+	margin-top: 9px
+	width: 150px
+	top: 23px
+	background: white
+	@extend .smallshadow
+.dropdown-list a
+	+solid-link($underline-color)
+	white-space: nowrap
+.dropdown-list a:active
+	+solid-link($orange-color)
+.profile .noshadow
+	width: 100%
+	left: -10px
+	right: 50px
+	height: 10px
+	bottom: 5px
+	background: white
+.profile .dropdown-list
+	background: white
+	top: 45px
+
+.lk .dropdown-list
+	top: 28px
+.lk .noshadow
+	bottom: auto
+	top: 18px
+	background: white
+	left: -10px
+	height: 10px
+
+.filter ul li .dropdown-list, .map-filter ul li .dropdown-list
+	top: 28px
+.filter ul li .noshadow, .map-filter ul li .noshadow
+	bottom: auto
+	top: 18px
+	background: white
+	left: -10px
+	height: 10px

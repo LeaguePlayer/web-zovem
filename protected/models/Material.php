@@ -9,7 +9,7 @@
  * @property string $model
  * @property integer $sort
  */
-class Material extends CActiveRecord
+class Material extends EActiveRecord
 {
     public function tableName()
     {
