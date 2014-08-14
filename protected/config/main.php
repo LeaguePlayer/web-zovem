@@ -15,6 +15,7 @@ return array_replace_recursive(
         ),
         'aliases'=>array(
             'appext'=>'application.extensions',
+            'widgets'=>'application.widgets'
         ),
         // autoloading model and component classes
         'import'=>array(

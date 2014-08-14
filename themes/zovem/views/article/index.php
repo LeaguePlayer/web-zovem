@@ -5,94 +5,9 @@
 ?>
 
 
-<div class="results">
-    <div class="slider" style="overflow: hidden; position: relative;">
-
-
-
-
-
-
-
-        <div style="display: block; position: relative; margin: 0px; width: 9000000px; transform: translate(-276px, 0px);"><div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-                <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-                <p class="type">кино</p>
-                <dl>
-                    <dt>Цена:</dt>
-                    <dd>500 р</dd>
-                    <dt>Когда:</dt>
-                    <dd>30 сентября</dd>
-                    <dt>Где:</dt>
-                    <dd><a href="#" title="кино в Планета кино">Планета кино</a></dd>
-                </dl>
-            </div><div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-                <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-                <p class="type">кино</p>
-                <dl>
-                    <dt>Цена:</dt>
-                    <dd>500 р</dd>
-                    <dt>Когда:</dt>
-                    <dd>30 сентября</dd>
-                    <dt>Где:</dt>
-                    <dd><a href="#" title="кино в Планета кино">Планета кино</a></dd>
-                </dl>
-            </div><div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-                <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-                <p class="type">кино</p>
-                <dl>
-                    <dt>Цена:</dt>
-                    <dd>500 р</dd>
-                    <dt>Когда:</dt>
-                    <dd>30 сентября</dd>
-                    <dt>Где:</dt>
-                    <dd><a href="#" title="кино в Планета кино">Планета кино</a></dd>
-                </dl>
-            </div><div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-                <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-                <p class="type">кино</p>
-                <dl>
-                    <dt>Цена:</dt>
-                    <dd>500 р</dd>
-                    <dt>Когда:</dt>
-                    <dd>30 сентября</dd>
-                    <dt>Где:</dt>
-                    <dd><a href="#" title="кино в Планета кино">Планета кино</a></dd>
-                </dl>
-            </div><div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-                <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-                <p class="type">кино</p>
-                <dl>
-                    <dt>Цена:</dt>
-                    <dd>500 р</dd>
-                    <dt>Когда:</dt>
-                    <dd>30 сентября</dd>
-                    <dt>Где:</dt>
-                    <dd><a href="#" title="кино в Планета кино">Планета кино</a></dd>
-                </dl>
-            </div><div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-                <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-                <p class="type">кино</p>
-                <dl>
-                    <dt>Цена:</dt>
-                    <dd>500 р</dd>
-                    <dt>Когда:</dt>
-                    <dd>30 сентября</dd>
-                    <dt>Где:</dt>
-                    <dd><a href="#" title="кино в Планета кино">Планета кино</a></dd>
-                </dl>
-            </div><div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-                <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-                <p class="type">кино</p>
-                <dl>
-                    <dt>Цена:</dt>
-                    <dd>500 р</dd>
-                    <dt>Когда:</dt>
-                    <dd>30 сентября</dd>
-                    <dt>Где:</dt>
-                    <dd><a href="#" title="кино в Планета кино">Планета кино</a></dd>
-                </dl>
-            </div></div></div><span id="controls"><a href="#" class="prevBtn prevnext"></a><a href="#" class="nextBtn prevnext"></a></span>
-</div>
+<?php
+    $this->widget('widgets.announce.AnnounceFavorites');
+?>
 
 
 <div class="filter">
