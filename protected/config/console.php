@@ -10,6 +10,7 @@ return array_replace_recursive(
         'import'=>array(
             'application.models.*',
             'application.components.*',
+            'application.modules.user.models.*'
             //'application.behaviors.*',
         ),
         'aliases'=>array(

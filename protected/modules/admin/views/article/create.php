@@ -1,15 +1,16 @@
 <?php
+/**
+ * @var $this ArticleController
+ * @var $model Article
+ */
+
 $this->breadcrumbs=array(
     "Структура сайта"=>array('/admin/structure/list'),
-    "Новости"=>array('/admin/newsList/update', 'id'=>$model->list_id),
+    "Статьи"=>array('/admin/article/list'),
     'Создание',
-);
-
-$this->menu=array(
-    array('label'=>'Новости','url'=>array('/admin/newsList/update', 'id'=>$model->list_id)),
 );
 ?>
 
-<h3>Добавление новости</h3>
+<h3>Добавление статьи</h3>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

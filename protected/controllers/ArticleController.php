@@ -1,13 +1,25 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: megakuzmitch
- * Date: 14.08.14
- * Time: 12:06
- * 
- * TODO
+ * Class ArticleController
  */
 
-class ArticleController {
+class ArticleController extends FrontController
+{
+    public function actionIndex()
+    {
+        $criteria = new CDbCriteria;
 
+
+
+        $dataProvider = new CActiveDataProvider('Article', array(
+            'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 20
+            )
+        ));
+
+        $this->render('index', array(
+            'dataProvider' => $dataProvider
+        ));
+    }
 }

@@ -12,16 +12,16 @@
         'tabs' => array(
             array(
                 'label' => 'Параметры раздела',
-                'content' => $this->renderPartial('_news_form', array(
+                'content' => $this->renderPartial('_article_form', array(
                     'form'=>$form,
                     'model'=>$model
                 ), true),
                 'active' => true
             ),
-            array(
-                'label' => 'SEO',
-                'content' => $this->getSeoForm($model),
-            ),
+//            array(
+//                'label' => 'SEO',
+//                'content' => $this->getSeoForm($model),
+//            ),
         ),
     )); ?>
 

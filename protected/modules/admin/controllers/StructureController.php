@@ -8,7 +8,6 @@ class StructureController extends AdminController
 	public function actionList($opened = false)
 	{
 		$openNode = Structure::model()->findByPk($opened);
-//		var_dump( $openNode ); die();
 
 		$this->render('list', array(
 			'openNode' => $openNode
@@ -19,8 +18,7 @@ class StructureController extends AdminController
     public function actionCreate($parent_id = null)
     {
         $model = new Structure;
-        if ( $parent_id )
-            $parent = Structure::model()->findByPk($parent_id);
+        $parent = Structure::model()->findByUrl('main');
 
         if ( isset($_POST['Structure']) ) {
             $model->attributes = $_POST['Structure'];

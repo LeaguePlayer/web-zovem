@@ -54,7 +54,7 @@
             <ul>
               <li class="current"><a href="#" title="Главная">Главная</a></li>
               <li><a href="#" title="Зовём карта">Зовем карта</a></li>
-              <li><a href="#" title="Статьи">Статьи</a></li>
+              <li><a href="<?= $this->createUrl('/article') ?>" title="Статьи">Статьи</a></li>
               <li><a href="#" title="Места и люди">Места и люди</a></li>
               <li><a href="#" title="О проекте">О проекте</a></li>
             </ul>
