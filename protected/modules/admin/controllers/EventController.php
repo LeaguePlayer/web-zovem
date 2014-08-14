@@ -130,13 +130,13 @@ class EventController extends AdminController
 
 	            	$model->saveAttributes(array('contents_id' => $contents->id));
 
-		            $times = array();
 		        	foreach ($times as $time) {
 		        		$time->event_id = $model->id;
 		        		$time->contents_id = $contents->id;
 		        		$time->save();
 		        	}
 
+        			Yii::app()->user->setFlash('message', "Анонс был успешно добавлен.");
 	                $this->redirect(array('/admin/event/update', 'id'=>$model->id));
 	        	}
             }
@@ -197,6 +197,7 @@ class EventController extends AdminController
 		        		$time->save();
 		        	}
 
+        			Yii::app()->user->setFlash('message', "Анонс был успешно сохранён.");
 	                $this->redirect(array('/admin/event/update', 'id'=>$model->id));
 	        	}
             }
@@ -242,6 +243,34 @@ class EventController extends AdminController
 		$time = Time::model()->findByPk($id);
 		if (!is_null($time))
 			$time->delete();
+	}
+
+	public function actionMassDelete()
+	{
+		$ids = $_POST['ids'];
+		foreach ($ids as $id) {
+			Event::model()->findByPk($id)->delete();
+		}
+        Yii::app()->user->setFlash('message', "Записи были успешно удалены.");
+	}
+
+	public function actionList()
+	{
+		$model = Event::model();
+
+		$model->unsetAttributes();
+    	$model->status = Event::STATUS_PUBLISHED;
+
+        if($showRemoved)
+            $model->removed();
+        
+        if(isset($_GET['Event']))
+            $model->attributes = $_GET['Event'];
+
+        $this->render('list',array(
+            'model' => $model,
+            'showRemoved' => $showRemoved,
+        ));
 	}
 
 }

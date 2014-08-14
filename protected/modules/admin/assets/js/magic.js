@@ -147,12 +147,13 @@ $(document).ready(function() {
     });
 
 
-    if ( $('.checkclass').length ) {
-        $('.checkclass').on('click', function(){
+    if ( $('.deleteChecked').length ) {
+        $(document.body).on('click', '.checkclass', function(e){
             if ($('.checkclass:checked').length)
                 $('.deleteChecked').prop('disabled', false);
             else 
                 $('.deleteChecked').prop('disabled', true);
+            e.stopPropagation();
         });
 
         $('.deleteChecked').on('click', function(){

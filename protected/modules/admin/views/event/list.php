@@ -6,6 +6,12 @@ $this->menu=array(
 
 <h1>Управление анонсами</h1>
 
+    <?php if(Yii::app()->user->hasFlash('message')):?>
+        <div class="alert alert-success">
+            <?php echo Yii::app()->user->getFlash('message'); ?>
+        </div>
+    <?php endif; ?>
+
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'event-grid',
 	'dataProvider'=>$model->search(),

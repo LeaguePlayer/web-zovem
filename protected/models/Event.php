@@ -131,5 +131,11 @@ class Event extends Material
         ));
     }
 
+    protected function beforeDelete()
+    {
+        $this->saveAttributes(array('status'=>Event::STATUS_DISCARDED));
+        return false;
+    }
+
 
 }
