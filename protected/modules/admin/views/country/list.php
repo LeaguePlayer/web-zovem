@@ -4,7 +4,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Управление <?php echo $model->translition(); ?></h1>
+<h1>Управление странами</h1>
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'country-grid',
@@ -19,24 +19,19 @@ $this->menu=array(
 	'columns'=>array(
 		'title',
 		array(
-			'name'=>'status',
-			'type'=>'raw',
-			'value'=>'Country::getStatusAliases($data->status)',
-			'filter'=>Country::getStatusAliases()
-		),
-		'sort',
-		array(
-			'name'=>'create_time',
-			'type'=>'raw',
-			'value'=>'$data->create_time ? SiteHelper::russianDate($data->create_time).\' в \'.date(\'H:i\', strtotime($data->create_time)) : ""'
-		),
-		array(
-			'name'=>'update_time',
-			'type'=>'raw',
-			'value'=>'$data->update_time ? SiteHelper::russianDate($data->update_time).\' в \'.date(\'H:i\', strtotime($data->update_time)) : ""'
-		),
-		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{update}{delete}',
+		    'buttons'=>array
+		    (
+		        'delete' => array
+		        (
+		            'url'=>'Yii::app()->createUrl("admin/country/delete", array("id"=>$data->id))',
+		        ),
+		        'update' => array
+		        (
+		            'url'=>'Yii::app()->createUrl("admin/country/update", array("id"=>$data->id))',
+		        ),
+		     ),
 		),
 	),
 )); ?>

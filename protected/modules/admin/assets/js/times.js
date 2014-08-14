@@ -369,9 +369,10 @@ function TimesGenerator() {
 
 $(document).ready(function(){
 
-  
-	tg = new TimesGenerator;
-  tg.fc.init(window.times);
+  if ($('#event-form').length) {
+    tg = new TimesGenerator;
+    tg.fc.init(window.times); 
+  }
 
 
 });

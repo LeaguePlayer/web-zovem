@@ -160,5 +160,5 @@
 	?>
 	</div>
 
-	<?php echo $form->dropDownListControlGroup($model, 'status', Event::getStatusAliases(), array('class'=>'span8', 'displaySize'=>1)); ?>
+	<?php echo $form->dropDownListControlGroup($model, 'status', Event::getStatus(), array('class'=>'span8', 'displaySize'=>1)); ?>
 

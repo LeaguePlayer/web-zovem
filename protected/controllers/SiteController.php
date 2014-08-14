@@ -3,10 +3,17 @@
 class SiteController extends FrontController
 {
 	public $layout = '//layouts/simple';
-	
+
 	/**
 	 * Declares class-based actions.
 	 */
+
+
+	public function renderFilter()
+	{
+		$this->renderPartial('/filters/main');
+	}
+
 	public function actions()
 	{
 		return array(
