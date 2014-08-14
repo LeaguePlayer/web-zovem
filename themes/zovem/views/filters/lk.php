@@ -9,7 +9,7 @@
           </ul>
         </div>
       <div class="new-action">
-        <a href="#" title="Добавить анонс">Добавить анонс</a>
+        <a href="/lk/createEvent" title="Добавить анонс">Добавить анонс</a>
       </div>
 
       

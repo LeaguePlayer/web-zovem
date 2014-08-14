@@ -14,6 +14,12 @@ class FrontController extends Controller
         $this->title = Yii::app()->name;
     }
 
+
+    public function renderFilter()
+    {
+        $this->renderPartial('//filters/main');
+    }
+    
     //Check home page
     public function is_home(){
         return $this->route == 'site/index';
@@ -36,4 +42,16 @@ class FrontController extends Controller
     {
         $this->menu = Menu::model()->getMenuList();
     }
+
+    public function actionError()
+    {
+        if($error=Yii::app()->errorHandler->error)
+        {
+            if(Yii::app()->request->isAjaxRequest)
+                echo $error['message'];
+            else
+                $this->render('error', $error);
+        }
+    }
+
 }
