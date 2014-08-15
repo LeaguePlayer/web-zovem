@@ -124,7 +124,7 @@ return array_replace_recursive(
                 'urlFormat'=>'path',
                 'rules'=>array(
                     'gii'=>'gii',
-                    '<controller>s' => '<controller>',
+                    '<controller>s' => '<controller>/index',
                     '/'=>'site/index',
                     '<controller:page>/<url:[\w_-]+>' => '<controller>/view',
                     'admin'=>'admin/structure',
@@ -145,6 +145,18 @@ return array_replace_recursive(
             ),
             'errorHandler'=>array(
                 'errorAction'=>'site/error',
+            ),
+            'widgetFactory'=>array(
+                'class'=>'CWidgetFactory',
+                'widgets' => array(
+                    'CLinkPager' => array(
+                        'header' => '',
+                        'firstPageLabel' => 'начало',
+                        'lastPageLabel' => 'конец',
+                        'prevPageLabel' => '&larr;',
+                        'nextPageLabel' => '&rarr;',
+                    )
+                )
             ),
         ),
         'params'=>array(),

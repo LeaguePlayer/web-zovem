@@ -9,22 +9,23 @@
 ?>
 
 <div class="comments">
-    <h2>Комментарии:</h2>
 
-    <div class="items">
-
-        <?php foreach ( $comments as $comment ): ?>
-            <div class="item">
-                <p class="author">
-                    <a href="#" title="Статьи и комментариии автора <?= $comment->user->fullName ?>"><?= $comment->user->fullName ?></a>
-                    <span class="date"><?= SiteHelper::russianDate($comment->date, false, true) ?></span>
-                </p>
-                <div class="content">
-                    <?= $comment->text ?>
+    <? if ( count($comments) ): ?>
+        <h2>Комментарии:</h2>
+        <div class="items">
+            <?php foreach ( $comments as $comment ): ?>
+                <div class="item">
+                    <p class="author">
+                        <a href="#" title="Статьи и комментариии автора <?= $comment->user->fullName ?>"><?= $comment->user->fullName ?></a>
+                        <span class="date"><?= SiteHelper::russianDate($comment->date, false, true) ?></span>
+                    </p>
+                    <div class="content">
+                        <?= $comment->text ?>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach ?>
-    </div>
+            <?php endforeach ?>
+        </div>
+    <? endif ?>
 
 
     <? /** @var $form CActiveForm */ ?>
