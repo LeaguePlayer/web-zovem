@@ -67,6 +67,7 @@ class Contents extends EActiveRecord
             'metro'=>array(self::BELONGS_TO, 'Metro', 'metro_id'),
             'time'=>array(self::HAS_ONE, 'Time', 'contents_id'),
             'event'=>array(self::HAS_ONE, 'Event', 'contents_id'),
+            'times'=>array(self::HAS_MANY, 'Time', 'contents_id'),
         );
     }
 
@@ -85,7 +86,7 @@ class Contents extends EActiveRecord
             'metro_id' => 'Метро',
             'address' => 'Улица, дом, корпус',
             'way' => 'Как добраться',
-            'wswg_body' => 'Тело анонса',
+            'wswg_body' => 'Полное описание мероприятия',
             'is_free' => 'Бесплатное мероприятие',
             'price' => 'Стоимость',
             'terms' => 'Условия участия',
@@ -189,5 +190,9 @@ class Contents extends EActiveRecord
         return parent::model($className);
     }
 
+    public function initDefaults()
+    {
+        $this->is_free = true;
+    }
 
 }

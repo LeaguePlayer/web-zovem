@@ -64,7 +64,6 @@
     </header>
 
     <?= $this->renderFilter(); ?>
-
     <?= $content; ?>
 
     <footer>

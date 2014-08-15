@@ -4,8 +4,14 @@ $this->menu=array(
 );
 ?>
 
-<h1>Управление <?php echo $model->translition(); ?></h1>
+<h1>Управление рубриками</h1>
 
+    <?php if(Yii::app()->user->hasFlash('message')):?>
+        <div class="alert alert-success">
+            <?php echo Yii::app()->user->getFlash('message'); ?>
+        </div>
+    <?php endif; ?>
+    
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'section-grid',
 	'dataProvider'=>$model->search(),
@@ -18,27 +24,25 @@ $this->menu=array(
     )',
 	'columns'=>array(
 		'title',
-		'icon',
 		array(
-			'name'=>'status',
+			'header'=>'Иконка',
 			'type'=>'raw',
-			'value'=>'Section::getStatusAliases($data->status)',
-			'filter'=>Section::getStatusAliases()
+			'value'=>'TbHtml::imageCircle($data->imgBehaviorIcon->getImageUrl("icon"))'
 		),
-		'sort',
-		array(
-			'name'=>'create_time',
-			'type'=>'raw',
-			'value'=>'$data->create_time ? SiteHelper::russianDate($data->create_time).\' в \'.date(\'H:i\', strtotime($data->create_time)) : ""'
-		),
-		array(
-			'name'=>'update_time',
-			'type'=>'raw',
-			'value'=>'$data->update_time ? SiteHelper::russianDate($data->update_time).\' в \'.date(\'H:i\', strtotime($data->update_time)) : ""'
-		),
-		'node_id',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{update}{delete}',
+		    'buttons'=>array
+		    (
+		        'delete' => array
+		        (
+		            'url'=>'Yii::app()->createUrl("admin/section/delete", array("id"=>$data->id))',
+		        ),
+		        'update' => array
+		        (
+		            'url'=>'Yii::app()->createUrl("admin/section/update", array("id"=>$data->id))',
+		        ),
+		     ),
 		),
 	),
 )); ?>

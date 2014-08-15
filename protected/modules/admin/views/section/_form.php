@@ -1,6 +1,7 @@
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'section-form',
 	'enableAjaxValidation'=>false,
+		'htmlOptions' => array('enctype'=>'multipart/form-data'),
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>

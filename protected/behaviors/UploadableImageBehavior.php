@@ -1,4 +1,6 @@
 <?php
+
+Yii::import('application.extensions.EPhpThumb.*');
 /**
  * @property string $savePath путь к директории, в которой сохраняем файлы
  */
@@ -8,7 +10,6 @@ class UploadableImageBehavior extends CActiveRecordBehavior
      * @var string название атрибута, хранящего в себе имя файла и файл
      */
     public $attributeName='image';
-
     /**
      * @var string алиас директории, куда будем сохранять файлы (убедись, что директория существует)
      */
@@ -28,7 +29,7 @@ class UploadableImageBehavior extends CActiveRecordBehavior
     /**
      * @var string типы файлов, которые можно загружать (нужно для валидации)
      */
-    public $fileTypes='jpg, png, jpeg, gif';
+    public $fileTypes='jpg, png, jpeg, gif, swf';
 
     public function events(){
         return array(
@@ -51,7 +52,7 @@ class UploadableImageBehavior extends CActiveRecordBehavior
                 if ( empty($subdirectory) ) continue;
                 $path .= DIRECTORY_SEPARATOR.$subdirectory;
             }
-            $path .= DIRECTORY_SEPARATOR.strtolower(get_class($this->owner));
+            $path .= DIRECTORY_SEPARATOR.strtolower($this->owner->getClass());
             if ( !@is_dir($path) ) {
                 mkdir($path, 0777, true);
             }
@@ -76,7 +77,7 @@ class UploadableImageBehavior extends CActiveRecordBehavior
     public function getThumbsUrl()
     {
         if ( $this->thumbsUrl === null ) {
-            $this->thumbsUrl = $this->saveUrl.'/'.strtolower(get_class($this->owner)).'/thumbs';
+            $this->thumbsUrl = $this->saveUrl.'/'.strtolower($this->owner->getClass()).'/thumbs';
         }
         return $this->thumbsUrl;
     }
@@ -86,7 +87,7 @@ class UploadableImageBehavior extends CActiveRecordBehavior
         if(in_array($owner->scenario,$this->scenarios)){
             // добавляем валидатор файла
             $fileValidator=CValidator::createValidator('file',$owner,$this->attributeName,
-                array('types'=>$this->fileTypes,'allowEmpty'=>true,'safe'=>false));
+                array('types'=>$this->fileTypes,'allowEmpty'=>true));
             $owner->validatorList->add($fileValidator);
         }
     }
@@ -101,7 +102,8 @@ class UploadableImageBehavior extends CActiveRecordBehavior
             $fileName = SiteHelper::genUniqueKey().'.'.$file->extensionName;
             $this->owner->setAttribute($this->attributeName,$fileName);
             $file->saveAs($this->getAbsoluteSavePath().DIRECTORY_SEPARATOR.$fileName);
-            $this->createThumbs($this->getAbsoluteSavePath(), $fileName);
+            if ($file->extensionName != "swf")
+                $this->createThumbs($this->getAbsoluteSavePath(), $fileName);
         }
         return true;
     }
@@ -145,6 +147,8 @@ class UploadableImageBehavior extends CActiveRecordBehavior
 
     protected function createThumbs($filePath, $fileName)
     {
+        if (! file_exists($filePath.DIRECTORY_SEPARATOR.$fileName) || ! $fileName)
+            return;
         $thumbsPath = $this->getAbsoluteThumbsPath();
         $thumb = new EPhpThumb();
         $thumb->init();
@@ -161,19 +165,27 @@ class UploadableImageBehavior extends CActiveRecordBehavior
     public function getImage($version = false, $alt = '', $htmlOptions = array())
     {
         $src = $this->getImageUrl($version);
-        if ( class_exists('TbHtml') ) {
-            return TbHtml::image($src, $alt, $htmlOptions);
-        } else {
-            return CHtml::image($src, $alt, $htmlOptions);
-        }
+        return CHtml::image($src, $alt, $htmlOptions);
     }
 
     public function getImageUrl($version = false)
     {
+        if (strpos($this->owner->getAttribute($this->attributeName), "swf") !== FALSE)
+            $version = NULL;
         if ($version) {
-            return '/'.$this->getThumbsUrl().'/'.$version.'_'.$this->owner->getAttribute($this->attributeName);
+            $url = $this->getThumbsUrl().'/'.$version.'_'.$this->owner->getAttribute($this->attributeName);
+            if (! file_exists($url)) {
+                $saveUrl = $this->saveUrl.'/'.strtolower($this->owner->getClass()).'/'.$this->owner->getAttribute($this->attributeName);
+                if (file_exists($saveUrl)) {
+                    $this->createThumbs($this->saveUrl.'/'.strtolower($this->owner->getClass()), $this->owner->getAttribute($this->attributeName));
+                }
+                else {
+                    return false;
+                }
+            }
         } else {
-            return '/'.$this->saveUrl.'/'.$this->owner->getAttribute($this->attributeName);
+            $url = $this->saveUrl.'/'.strtolower($this->owner->getClass()).'/'.$this->owner->getAttribute($this->attributeName);
         }
+        return '/'.$url;
     }
 }

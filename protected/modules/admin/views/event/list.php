@@ -79,7 +79,8 @@ $this->menu=array(
 
 <div class="well">
 	<p>
-		<button class="btn btn-danger deleteChecked" disabled="disabled">Удалить выбранное</button>
+		<button class="btn btn-danger deleteChecked actionCheched" disabled="disabled">Удалить выбранное</button>
+		<button class="btn btn-primary publishChecked actionCheched" disabled="disabled">Опубликовать выбранные</button>
 	</p>
 </div>
 

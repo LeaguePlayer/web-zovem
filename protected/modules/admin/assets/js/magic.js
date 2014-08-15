@@ -147,12 +147,12 @@ $(document).ready(function() {
     });
 
 
-    if ( $('.deleteChecked').length ) {
+    if ( $('.actionCheched').length ) {
         $(document.body).on('click', '.checkclass', function(e){
-            if ($('.checkclass:checked').length)
-                $('.deleteChecked').prop('disabled', false);
+            if ($('.checkclass:checked').length) 
+                $('.actionCheched').prop('disabled', false);
             else 
-                $('.deleteChecked').prop('disabled', true);
+                $('.actionCheched').prop('disabled', true);
             e.stopPropagation();
         });
 
@@ -164,10 +164,24 @@ $(document).ready(function() {
 
             if (window.confirm('Вы уверены, что хотите удалить выбранные записи?')) {
                 $.post("/admin/event/massDelete/", { ids: ids }, function(data) {
-                    alert('Выбранные записи были успешно удалены.');
                     location.reload(true);
                 });
             }
+
+            return false;
+        });
+    }
+
+    if ( $('.publishChecked').length ) {
+        $('.publishChecked').on('click', function(){
+            var ids = [];
+            $('.checkclass:checked').each(function(){
+                ids.push($(this).val());
+            });
+
+            $.post("/admin/event/massPublish/", { ids: ids }, function(data) {
+                location.reload(true);
+            });
 
             return false;
         });

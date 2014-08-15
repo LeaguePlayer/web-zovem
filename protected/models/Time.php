@@ -99,5 +99,14 @@ class Time extends EActiveRecord
         return parent::model($className);
     }
 
+    public function afterSave()
+    {
+        $this->saveAttributes(array(
+            'start_datetime' => $this->date . ' ' . $this->start_time,
+            'end_datetime' => $this->date . ' ' . $this->end_time,
+        ));
+        return parent::afterSave();
+    }
+
 
 }

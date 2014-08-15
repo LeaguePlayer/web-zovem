@@ -2,28 +2,10 @@
 
 class SiteController extends FrontController
 {
-	public $layout = '//layouts/simple';
 
 	/**
 	 * Declares class-based actions.
 	 */
-
-
-	public function actions()
-	{
-		return array(
-			// captcha action renders the CAPTCHA image displayed on the contact page
-			'captcha'=>array(
-				'class'=>'CCaptchaAction',
-				'backColor'=>0xFFFFFF,
-			),
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
-			'page'=>array(
-				'class'=>'CViewAction',
-			),
-		);
-	}
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -32,7 +14,7 @@ class SiteController extends FrontController
 	public function actionIndex()
 	{
         $this->title = Yii::app()->config->get('app.name');
-		$this->render('index');
+		$this->render('index', array('sections' => Section::getIndexSections($this->city)));
 	}
 
 	/**

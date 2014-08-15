@@ -219,4 +219,9 @@ class EActiveRecord extends CActiveRecord
         return $result;
     }
 
+    public function getClass()
+    {
+        return get_class($this);
+    }
+
 }

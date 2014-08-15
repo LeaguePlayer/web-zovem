@@ -466,7 +466,7 @@ $maxdesktop: 1400px
 
 //главная - самое интересное
 .most-interesting
-	margin: -30px 0 60px 0
+	margin: 0 0 60px 0
 .most-interesting .top-bar
 	margin: 0 0 20px 0
 	padding: 0 0 12px 0
@@ -1593,6 +1593,11 @@ $category-icon-width: 39px
 		display: none
 .placespeople .item:hover .info .about, .placespeople .item:hover .info .link
 	display: block
+.most-interesting .item .active
+	border: 2px $orange-color solid
+	padding: 5px
+.most-interesting .item .active .link a
+	color: $orange-color
 .placespeople .item .active
 	border: 2px $orange-color solid
 	padding: 5px

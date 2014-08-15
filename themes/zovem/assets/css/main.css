@@ -544,7 +544,7 @@ html {
   width: 100%; }
 
 .most-interesting {
-  margin: -30px 0 60px 0; }
+  margin: 0 0 60px 0; }
 
 .most-interesting .top-bar {
   margin: 0 0 20px 0;
@@ -1911,6 +1911,13 @@ html {
 
 .placespeople .item:hover .info .about, .placespeople .item:hover .info .link {
   display: block; }
+
+.most-interesting .item .active {
+  border: 2px #ff6600 solid;
+  padding: 5px; }
+
+.most-interesting .item .active .link a {
+  color: #ff6600; }
 
 .placespeople .item .active {
   border: 2px #ff6600 solid;

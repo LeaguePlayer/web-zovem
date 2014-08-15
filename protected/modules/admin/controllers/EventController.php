@@ -99,6 +99,8 @@ class EventController extends AdminController
         $model = new Event();
         $contents = new Contents();
 
+        $contents->initDefaults();
+
         $this->createMap();
 
         $times = array();
@@ -252,6 +254,15 @@ class EventController extends AdminController
 			Event::model()->findByPk($id)->delete();
 		}
         Yii::app()->user->setFlash('message', "Записи были успешно удалены.");
+	}
+
+	public function actionMassPublish()
+	{
+		$ids = $_POST['ids'];
+		foreach ($ids as $id) {
+			Event::model()->findByPk($id)->saveAttributes(array('status' => Event::STATUS_PUBLISHED));
+		}
+        Yii::app()->user->setFlash('message', "Записи были успешно опубликованы.");
 	}
 
 	public function actionList()

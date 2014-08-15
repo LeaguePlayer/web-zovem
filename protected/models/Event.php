@@ -115,6 +115,7 @@ class Event extends Material
         $criteria->order = 'sort';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
+            'pagination' => array('pageSize' => 30),
         ));
     }
 
@@ -133,8 +134,13 @@ class Event extends Material
 
     protected function beforeDelete()
     {
-        $this->saveAttributes(array('status'=>Event::STATUS_DISCARDED));
-        return false;
+        if ($this->status !== Event::STATUS_DISCARDED) {
+            $this->saveAttributes(array('status'=>Event::STATUS_DISCARDED));
+            return false;
+        }
+        else {
+            return parent::beforeDelete();
+        }
     }
 
 

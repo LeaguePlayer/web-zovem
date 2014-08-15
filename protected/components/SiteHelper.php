@@ -108,7 +108,7 @@ class SiteHelper {
 		}
 		$date = explode(".", date("d.m.Y", $timestamp));
 		$m = self::russianMonth($date[1]);
-		return $date[0] . '&nbsp;' . $m . '&nbsp;' . $date[2];
+		return $date[0] . '&nbsp;' . $m;
 	}
 
 	public static function sendMail($subject,$message,$to='',$from='')
