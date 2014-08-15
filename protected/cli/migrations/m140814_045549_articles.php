@@ -8,7 +8,7 @@
 class m140814_045549_articles extends CDbMigration
 {
     // таблицы к удалению, можно использовать '{{table}}'
-	private $dropped = array('{{articles}}', '{{article_tags}}');
+	private $dropped = array('{{articles}}', '{{entity_tags}}');
  
     public function safeUp()
     {
@@ -40,7 +40,7 @@ class m140814_045549_articles extends CDbMigration
             'entity_id' => 'integer',
             'tag_id' => 'integer'
         ), 'ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci');
-        $this->addPrimaryKey('PRIMARY', '{{article_tags}}', 'entity_class, entity_id, tag_id');
+        $this->addPrimaryKey('PRIMARY', '{{entity_tags}}', 'entity_class, entity_id, tag_id');
 
         $this->insert('{{materials}}', array(
             'class_name' => 'Article',
