@@ -1,14 +1,22 @@
+<?php
+/**
+ * @var $data Article
+ */
+?>
 
 <div class="item">
-    <h2><a href="#" title="Статья раздела Кино">Величественный смог покорил небеса Лондона</a><span class="concerts"></span></h2>
-    <p class="preview">Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и журналистов,
-        создателей научных заявок и отчетов — для всех, кто относится к тексту, как к количеству знаков.
-        <span class="date">25 августа</span>
+    <h2><a href="<?= $data->getUrl() ?>" title="<?= $data->section->title ?>"><?= $data->title ?></a><img
+            class="section_icon" src="<?= $data->section->icon ?>" alt="<?= $data->section->title ?>"/>
+    </h2>
+    <p class="preview">
+        <?= $data->annotate ?>
+        <span class="date"><?= SiteHelper::russianDate($data->public_date, false) ?></span>
     </p>
     <div class="misc">
         <p class="tags">
-            <a href="#" title="тем детям">детям</a>
-            <a href="#" title="тем семейный">семейный</a>
+            <? foreach ( $data->tags as $tag ): ?>
+                <a href="#" title="<?= $tag->value ?>"><?= $tag->value ?></a>
+            <? endforeach ?>
         </p>
         <p class="lcomments">
             <a href="#" class="comments" title="Комментарии">14</a>

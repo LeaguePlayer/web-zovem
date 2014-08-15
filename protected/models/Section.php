@@ -33,9 +33,26 @@ class Section extends Material
     }
 
 
+    public function scopes()
+    {
+        return array(
+            'hasArticles' => array(
+                'with' => array(
+                    'articles' => array(
+                        'select' => false,
+                        'joinType' => 'INNER JOIN',
+                        'condition' => "articles.status = " . Article::STATUS_PUBLISH,
+                    )
+                )
+            )
+        );
+    }
+
+
     public function relations()
     {
         return array(
+            'articles' => array(self::HAS_MANY, 'Article', 'section_id')
         );
     }
 
@@ -88,4 +105,8 @@ class Section extends Material
     }
 
 
+    public function getUrl()
+    {
+        return Yii::app()->urlManager->createUrl('/sections/view', array('id' => $this->id));
+    }
 }

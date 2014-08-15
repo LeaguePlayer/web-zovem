@@ -1,12 +1,14 @@
 <?php
 /**
  * @var $dataProvider CActiveDataProvider
+ * @var $sections Section[]
+ * @var $authors User[]
  */
 ?>
 
 
 <?php
-    $this->widget('widgets.announce.AnnounceFavorites');
+    $this->widget('widgets.event.EventFavorites');
 ?>
 
 
@@ -17,28 +19,23 @@
                 <a href="#" title="Выберите раздел" role="dropdown-trigger">Раздел</a>
                 <div class="noshadow" style="display: none; width: 110px;"></div>
                 <ul class="dropdown-list" style="display: none;">
-                    <li><a href="#">На покатушки</a></li>
-                    <li><a href="#">На свадьбу</a></li>
-                    <li><a href="#">На шоппинг</a></li>
+                    <? foreach ( $sections as $section ): ?>
+                        <li><a href="#"><?= $section->title ?></a></li>
+                    <? endforeach ?>
                 </ul>
             </li>
             <li role="dropdown-parent">
                 <a href="#" title="Выберите автора" role="dropdown-trigger">Автор</a>
                 <div class="noshadow" style="display: none; width: 136px;"></div>
                 <ul class="dropdown-list" style="display: none;">
-                    <li><a href="#">Анна Сидоренко</a></li>
-                    <li><a href="#">Елена Анищева</a></li>
-                    <li><a href="#">Дмитрий Эникеев</a></li>
+                    <? foreach ( $authors as $author ): ?>
+                        <li><a href="#"><?= $author->getFullName() ?></a></li>
+                    <? endforeach ?>
                 </ul>
             </li>
             <li role="dropdown-parent">
                 <a href="#" title="Выберите дату" role="dropdown-trigger">Сб 7 декабря</a>
                 <div class="noshadow" style="width: 136px;"></div>
-                <ul class="dropdown-list">
-                    <li><a href="#">Анна Сидоренко</a></li>
-                    <li><a href="#">Елена Анищева</a></li>
-                    <li><a href="#">Дмитрий Эникеев</a></li>
-                </ul>
             </li>
             <li role="dropdown-parent">
                 <a href="#" title="Выберите тему" role="dropdown-trigger">Тема</a>
@@ -86,9 +83,10 @@
 
     <? $this->widget('zii.widgets.CListView', array(
         'dataProvider' => $dataProvider,
-        'itemView' => '_item'
+        'template' => '{items}',
+        'itemView' => '_item',
+        'htmlOptions' => array(
+            'class' => 'content-items'
+        )
     )) ?>
-
-    <div class="content-items">
-    </div>
 </div>

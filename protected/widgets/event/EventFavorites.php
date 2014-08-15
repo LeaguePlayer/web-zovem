@@ -3,7 +3,7 @@
 /**
  * Class AnnounceFavorites
  */
-class AnnounceFavorites extends CWidget
+class EventFavorites extends CWidget
 {
     public $controllerId = 'event';
 

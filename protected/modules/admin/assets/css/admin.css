@@ -4,6 +4,10 @@ body {
   background-color: #fff;
 }
 
+h3 {
+    line-height: 1.2;
+}
+
 .well.sidebar {
     padding: 8px 0;
 }

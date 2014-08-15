@@ -7,7 +7,7 @@
  * @property integer $id
  * @property string $value
  */
-class Tag extends EActiveRecord
+class Tag extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -47,6 +47,8 @@ class Tag extends EActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'articles' => array(self::MANY_MANY, 'Article', '{{entity_tags}}(tag_id, entity_id)',
+                'on' => 'entity_class="Article"'),
 		);
 	}
 
@@ -61,18 +63,23 @@ class Tag extends EActiveRecord
 		);
 	}
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
+
+    public function scopes()
+    {
+        return array(
+            'hasArticles' => array(
+                'with' => array(
+                    'articles' => array(
+                        'select' => false,
+                        'joinType' => 'INNER JOIN',
+                        'condition' => 'articles.status = ' . Article::STATUS_PUBLISH
+                    )
+                )
+            )
+        );
+    }
+
+
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -87,30 +94,18 @@ class Tag extends EActiveRecord
 		));
 	}
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Tag the static model class
-	 */
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 
-	public function updateValues($values)
-	{
-		if ( is_string($values) ) {
-			$values = explode(',', $values);
-		} else if ( !is_array($values) ) {
-			return;
-		}
-		$exists = CHtml::listData($this->findAll(), 'id', 'value');
-		$new_values = array_diff($values, $exists);
-		$command = Yii::app()->db->createCommand("INSERT INTO {$this->tableName()} (value) VALUES (:val)");
-		foreach ( $new_values as $v ) {
-			$command->bindParam(':val', $v, PDO::PARAM_STR);
-			$command->execute();
-		}
-	}
+
+    public function asJson()
+    {
+        $all = Yii::app()->db->createCommand()
+            ->select('value')->from(self::tableName())
+            ->queryColumn();
+        return CJSON::encode($all);
+    }
 }

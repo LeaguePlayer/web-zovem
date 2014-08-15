@@ -1,56 +1,35 @@
 <?php
 /**
- * Миграция m140814_045549_articles
+ * Миграция m140815_051645_comments
  *
  * @property string $prefix
  */
  
-class m140814_045549_articles extends CDbMigration
+class m140815_051645_comments extends CDbMigration
 {
     // таблицы к удалению, можно использовать '{{table}}'
-	private $dropped = array('{{articles}}', '{{article_tags}}');
+	private $dropped = array('{{comments}}');
  
     public function safeUp()
     {
         $this->_checkTables();
  
-        $this->createTable('{{articles}}', array(
+        $this->createTable('{{comments}}', array(
             'id' => 'pk', // auto increment
-            'title' => 'varchar(256) COMMENT "Заголовок"',
-            'content' => 'text COMMENT "Текст статьи"',
-            'annotate' => 'text COMMENT "Краткое содержание статьи"',
-			'section_id' => "integer COMMENT 'Раздел'",
-			'user_id' => "integer COMMENT 'Автор'",
-			'anonymous' => "tinyint COMMENT 'Опубликовать анонимно'",
-			'city_id' => "integer COMMENT 'Город'",
-            'public_date' => "datetime COMMENT 'Дата публикации'",
-			'node_id' => "integer",
-			'comments_count' => "integer",
-			'comments_new_count' => "integer",
-			'likes_count' => "integer",
-			'status' => "tinyint COMMENT 'Статус'",
-			'sort' => "integer COMMENT 'Вес для сортировки'",
-            'create_time' => "datetime COMMENT 'Дата создания'",
-            'update_time' => "datetime COMMENT 'Дата последнего редактирования'",
-        ), 'ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci');
-
-
-        $this->createTable('{{entity_tags}}', array(
-            'entity_class' => 'varchar(40)',
-            'entity_id' => 'integer',
-            'tag_id' => 'integer'
-        ), 'ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci');
-        $this->addPrimaryKey('PRIMARY', '{{article_tags}}', 'entity_class, entity_id, tag_id');
-
-        $this->insert('{{materials}}', array(
-            'class_name' => 'Article',
-            'name' => 'Статья'
-        ));
+            'type' => 'varchar(256) NOT NULL',
+            'material_id' => 'integer NOT NULL',
+            'user_id' => 'integer',
+            'date' => 'datetime',
+            'title' => 'varchar(256)',
+            'text' => 'text',
+            'public' => 'tinyint',
+            'moder' => 'tinyint',
+        ),
+        'ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci');
     }
  
     public function safeDown()
     {
-        $this->delete('{{materials}}', 'class_name = "Article"');
         $this->_checkTables();
     }
  

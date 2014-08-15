@@ -7,6 +7,7 @@
     * @property integer $id
     * @property string $title
     * @property string $content
+    * @property string $annotate
     * @property integer $section_id
     * @property integer $user_id
     * @property integer $anonymous
@@ -17,8 +18,11 @@
     * @property integer $sort
     * @property string $create_time
     * @property string $update_time
+    * @property integer $comments_count
+    * @property integer $comments_new_count
+    * @property integer $likes_count
 */
-class Article extends EActiveRecord
+class Article extends EActiveRecord implements ICommentDepends
 {
     public function tableName()
     {
@@ -31,7 +35,7 @@ class Article extends EActiveRecord
         return array(
             array('section_id, user_id, anonymous, city_id, node_id, status, sort', 'numerical', 'integerOnly'=>true),
             array('title', 'length', 'max'=>256),
-            array('content, public_date, create_time, update_time', 'safe'),
+            array('content, public_date, create_time, update_time, tags', 'safe'),
             // The following rule is used by search().
             array('id, title, content, section_id, user_id, anonymous, city_id, public_date, node_id, status, sort, create_time, update_time', 'safe', 'on'=>'search'),
         );
@@ -41,7 +45,19 @@ class Article extends EActiveRecord
     public function relations()
     {
         return array(
+            'section' => array(self::BELONGS_TO, 'Section', 'section_id'),
+            'author' => array(self::BELONGS_TO, 'User', 'user_id'),
         );
+    }
+
+
+    public function updateCommentsState($comment)
+    {
+        $comments_count = ArticleComment::model()->material($this->id)->count('public=1');
+        $comments_new_count = ArticleComment::model()->material($this->id)->count('public=1 AND moder=0');
+
+        $this->updateByPk($this->id, array('comments_count' => $comments_count));
+        $this->updateByPk($this->id, array('comments_new_count' => $comments_new_count));
     }
 
 
@@ -61,6 +77,7 @@ class Article extends EActiveRecord
             'sort' => 'Вес для сортировки',
             'create_time' => 'Дата создания',
             'update_time' => 'Дата последнего редактирования',
+            'tags' => 'Тема'
         );
     }
 
@@ -74,6 +91,22 @@ class Article extends EActiveRecord
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
 			),
+            'TagsBehavior' => array(
+                'class' => 'application.behaviors.TagsBehavior'
+            ),
+//            'PurifyText' => array(
+//                'class' => 'application.behaviors.DPurifyTextBehavior',
+//                'sourceAttribute' => 'content',
+//                'destinationAttribute' => 'annotate',
+//                'purifierOptions' => array(
+//                    'Core.EscapeInvalidTags' => true,
+//                    'AutoFormat.AutoParagraph' => false,
+//                    'AutoFormat.Linkify' => true,
+//                    'HTML.Allowed' => 'b,i,a[href]',
+//                    'HTML.Nofollow' => true,
+//                ),
+//                'updateOnAfterFind' => false,
+//            )
         ));
     }
 
@@ -105,4 +138,21 @@ class Article extends EActiveRecord
     }
 
 
+    public function beforeSave()
+    {
+    	if (parent::beforeSave()) {
+            if ( empty($this->annotate) ) {
+                $this->annotate = SiteHelper::intro($this->content, 400, '...');
+                $this->update('annotate');
+            }
+    		return true;
+    	}
+    	return false;
+    }
+
+
+    public function getUrl()
+    {
+        return Yii::app()->urlManager->createUrl('/article/view', array('id' => $this->id));
+    }
 }

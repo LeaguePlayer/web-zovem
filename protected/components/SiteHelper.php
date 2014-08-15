@@ -95,7 +95,7 @@ class SiteHelper {
 		}
 	}
 
-	public static function russianDate($datetime = null) {
+	public static function russianDate($datetime = null, $outYear = true, $outTime = false) {
         if (!$datetime || $datetime == 0)
             return '';
             
@@ -108,7 +108,14 @@ class SiteHelper {
 		}
 		$date = explode(".", date("d.m.Y", $timestamp));
 		$m = self::russianMonth($date[1]);
-		return $date[0] . '&nbsp;' . $m . '&nbsp;' . $date[2];
+        $out = $date[0] . ' ' . $m;
+        if ( $outYear ) {
+            $out .= ' ' . $date[2];
+        }
+        if ( $outTime ) {
+            $out .= ', в ' . date('H:i');
+        }
+		return $out;
 	}
 
 	public static function sendMail($subject,$message,$to='',$from='')
@@ -135,4 +142,14 @@ class SiteHelper {
     	return $result;
     }
 
+    public static function intro($string, $maxlen, $endintro = '')
+    {
+        $_str = strip_tags($string);
+        $_str = trim($_str);
+        $_len = strlen($_str);
+        if ($_len <= $maxlen)
+            return $_str;
+        else
+            return mb_substr($_str, 0, $maxlen, 'UTF-8').' '.$endintro;
+    }
 }
