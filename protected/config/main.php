@@ -5,7 +5,7 @@
 return array_replace_recursive(
     array(
         'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-        'name'=>'Каркас приложения',
+        'name'=>'Зовем',
         'language' => 'ru',
         'theme'=>'zovem',
         // preloading 'log' component
@@ -13,9 +13,10 @@ return array_replace_recursive(
             'log',
             'config',
         ),
-		'aliases'=>array(
+        'aliases'=>array(
             'appext'=>'application.extensions',
-		),
+            'widgets'=>'application.widgets'
+        ),
         // autoloading model and component classes
         'import'=>array(
             'application.models.*',
@@ -23,7 +24,7 @@ return array_replace_recursive(
             'application.behaviors.*',
             'appext.imagesgallery.models.*',
             'application.modules.hybridauth.controllers.*',
-			'application.modules.user.models.*',
+            'application.modules.user.models.*',
         ),
         'modules'=>array(
             'admin'=>array(),
@@ -42,35 +43,35 @@ return array_replace_recursive(
                 'returnLogoutUrl' => array('/user/login'),
             ),
             'hybridauth' => array(
-                'baseUrl' => 'http://'. $_SERVER['SERVER_NAME'] . '/hybridauth', 
+                'baseUrl' => 'http://'. $_SERVER['SERVER_NAME'] . '/hybridauth',
                 'withYiiUser' => true, // Set to true if using yii-user
-                "providers" => array ( 
-                    
-     
-                    "vkontakte" => array ( 
+                "providers" => array (
+
+
+                    "vkontakte" => array (
                         "enabled" => true,
                         "keys"    => array ( "id" => "4350377", "secret" => "y0mJYEGQxIkE8gETPJll" ),
-                        "scope"   => "", 
-                        "display" => "" 
+                        "scope"   => "",
+                        "display" => ""
                     ),
-     
-                    "facebook" => array ( 
+
+                    "facebook" => array (
                         "enabled" => true,
                         "keys"    => array ( "id" => "501599393296930", "secret" => "a7ca8048f1384a1acd401eaa434f6741" ),
-                        "scope"   => "", 
-                        "display" => "" 
+                        "scope"   => "",
+                        "display" => ""
                     ),
-     
-                    "twitter" => array ( 
+
+                    "twitter" => array (
                         "enabled" => true,
-                        "keys"    => array ( "key" => "", "secret" => "" ) 
+                        "keys"    => array ( "key" => "", "secret" => "" )
                     ),
-                    
+
                     "openid" => array (
                         "enabled" => true
                     ),
 
-                    "google" => array ( 
+                    "google" => array (
                         "enabled" => true,
                         "keys"    => array ( "id" => "", "secret" => "" ),
                         "scope"   => ""
@@ -123,18 +124,19 @@ return array_replace_recursive(
                 'urlFormat'=>'path',
                 'rules'=>array(
                     'gii'=>'gii',
-                    'admin'=>'admin/structure',
-                    'admin/<controller:!config>' => 'admin/<controller>/list',
+                    '<controller>s' => '<controller>',
                     '/'=>'site/index',
                     '<controller:page>/<url:[\w_-]+>' => '<controller>/view',
+                    'admin'=>'admin/structure',
+                    'admin/<controller:!config>' => 'admin/<controller>/list',
                 ),
             ),
             'clientScript'=>array(
                 'class'=>'EClientScript',
-				'scriptMap'=>array(
-					'jquery.js'=>'http://code.jquery.com/jquery-1.11.0.js',
-					'jquery.min.js'=>'http://code.jquery.com/jquery-1.11.0.min.js',
-				),
+                'scriptMap'=>array(
+                    'jquery.js'=>'http://code.jquery.com/jquery-1.11.0.js',
+                    'jquery.min.js'=>'http://code.jquery.com/jquery-1.11.0.min.js',
+                ),
             ),
             'date' => array(
                 'class'=>'application.components.Date',

@@ -34,11 +34,28 @@ class Section extends EActiveRecord
     }
 
 
+    public function scopes()
+    {
+        return array(
+            'hasArticles' => array(
+                'with' => array(
+                    'articles' => array(
+                        'select' => false,
+                        'joinType' => 'INNER JOIN',
+                        'condition' => "articles.status = " . Article::STATUS_PUBLISH,
+                    )
+                )
+            )
+        );
+    }
+
+
     public function relations()
     {
         return array(
             'contents'=>array(self::HAS_MANY, 'Contents', 'section_id'),
             'events'=>array(self::HAS_MANY,'Event',array('event_id'=>'id'),'through'=>'contents'),
+            'articles' => array(self::HAS_MANY, 'Article', 'section_id'),
         );
     }
 
@@ -104,7 +121,7 @@ class Section extends EActiveRecord
         return parent::model($className);
     }
 
-    public static function getIndexSections($city_id = null)
+    public static function getIndexSections($city_id = null, $date = null)
     {
         $cityCond = '';
         if (! is_null($city_id) && is_numeric($city_id))
@@ -116,8 +133,9 @@ class Section extends EActiveRecord
                     'condition' => 'events.status = '.Event::STATUS_PUBLISHED,
                 ),
                 'events.times'=>array(
-                    //'condition'=>'times.date = "2014-08-21"',
                     'limit'=>1,
+                    'order'=>'times.start_datetime ASC',
+                    'condition'=>'times.end_datetime >= NOW()',
                 ),
                 'events.current_contents',
             )
@@ -125,4 +143,8 @@ class Section extends EActiveRecord
     }
 
 
+    public function getUrl()
+    {
+        return Yii::app()->urlManager->createUrl('/sections/view', array('id' => $this->id));
+    }
 }

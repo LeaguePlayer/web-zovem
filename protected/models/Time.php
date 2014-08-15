@@ -101,6 +101,7 @@ class Time extends EActiveRecord
 
     public function afterSave()
     {
+        $this->isNewRecord = false;
         $this->saveAttributes(array(
             'start_datetime' => $this->date . ' ' . $this->start_time,
             'end_datetime' => $this->date . ' ' . $this->end_time,
