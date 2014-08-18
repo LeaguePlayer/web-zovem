@@ -3,6 +3,8 @@
  * @var $dataProvider CActiveDataProvider
  * @var $sections Section[]
  * @var $authors User[]
+ * @var $this ArticleController
+ * @var $tags Tag[]
  */
 ?>
 
@@ -29,7 +31,7 @@
                 <div class="noshadow" style="display: none; width: 136px;"></div>
                 <ul class="dropdown-list" style="display: none;">
                     <? foreach ( $authors as $author ): ?>
-                        <li><a href="#"><?= $author->getFullName() ?></a></li>
+                        <li><a href="#"><?= $author->fullName ?></a></li>
                     <? endforeach ?>
                 </ul>
             </li>
@@ -41,9 +43,9 @@
                 <a href="#" title="Выберите тему" role="dropdown-trigger">Тема</a>
                 <div class="noshadow" style="width: 136px;"></div>
                 <ul class="dropdown-list">
-                    <li><a href="#">Анна Сидоренко</a></li>
-                    <li><a href="#">Елена Анищева</a></li>
-                    <li><a href="#">Дмитрий Эникеев</a></li>
+                    <? foreach ( $tags as $tag ): ?>
+                        <li><a href="<?= $this->createUrl('/article/index', array('tag' => $tag->value)) ?>"><?= $tag->value ?></a></li>
+                    <? endforeach ?>
                 </ul>
             </li>
         </ul>
@@ -72,19 +74,21 @@
     <div class="authors">
         <h2>По авторам:</h2>
         <ul>
-            <li><a href="#" title="Статьи и комментариии автора Петров Петр">Галина Тимченко</a></li>
-            <li><a href="#" title="Статьи и комментариии автора Петров Петр">Александр Филимонов</a></li>
-            <li><a href="#" title="Статьи и комментариии автора Петров Петр">Алексей Пономарев</a></li>
-            <li><a href="#" title="Статьи и комментариии автора Петров Петр">Игорь Петрушев</a></li>
-            <li><a href="#" title="Статьи и комментариии автора Петров Петр">Павел Борисов</a></li>
+            <? foreach ( $authors as $author ): ?>
+                <li><a href="#"><?= $author->getFullName() ?></a></li>
+            <? endforeach ?>
         </ul>
+
         <h2><a href="#">Анонсы</a></h2>
     </div>
 
     <? $this->widget('zii.widgets.CListView', array(
         'dataProvider' => $dataProvider,
-        'template' => '{items}',
+        'template' => '{items}{pager}',
         'itemView' => '_item',
+        'pager' => array(
+            'cssFile' => $this->getAssetsUrl() . '/css/pager.css',
+        ),
         'htmlOptions' => array(
             'class' => 'content-items'
         )

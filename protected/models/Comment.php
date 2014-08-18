@@ -168,6 +168,7 @@ class Comment extends CActiveRecord
 
     protected function afterDelete()
     {
+        die('asdfasdasad');
         $this->updateMaterial();
         parent::afterDelete();
     }

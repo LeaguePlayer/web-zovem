@@ -60,7 +60,7 @@ html {
 .inline-block-fix, .header .menu ul li, .new-action, .top-filter .filter-box, .top-filter .filter-box .right, .top-filter .filter-box .right > div, .top-filter .filter-box .tag-search, .top-filter .filter-box .action-types, .top-filter .filter-box .dates, .top-filter .login, .profile, .bottom-filter ul li, .event-preview, .map-page .map .overlay-example, .most-interesting .items .item, .filter > div > ul > li, .filter .left-bar, .journal-list .authors, .journal-list .content-items, .map-page .header .left-bar > a, .map-page .header .to-other-pages, .map-page .header .city, .events-list .left-bar, .events-list .content-items, .fresh-list .content-items, .lk-nav .nav ul li, .lk-list, .lk .added, .lk .updates, .lk .category-filter li, .lk-list-bar, .lk-columns .added, .announcements .added, .calendar .added, .templates .added, .lk-columns .content-items, .announcements .content-items, .calendar .content-items, .templates .content-items, .form .dateinput, .form .new-date, .form .time .timeinput, .form .time .separator, .new-smth .form, .new-smth .additional, .dropdown-list, .login .social ul li {
   font-size: 14px; }
 
-.gray-tag, .blue-tag, .most-interesting .items .item .tags a:hover, .content-items .item .tags a:hover, .article .tags a:hover, .form .tags label:hover, .form .tags input:checked + label, .orange-tag, .content-items .item .tags a:active, .form .tags label:active, .form .tags input:checked + label:active, .most-interesting .items .item .tags a, .content-items .item .tags a, .article .tags a, .event .info .tags a, .event .extra .tags a, .organazer .info .tags a, .form .tags label {
+.gray-tag, .blue-tag, .orange-tag, .most-interesting .items .item .tags a, .content-items .item .tags a, .article .tags a, .event .info .tags a, .event .extra .tags a, .organazer .info .tags a, .form .tags label {
   border: none !important;
   display: inline-block;
   height: 12px;
@@ -72,7 +72,8 @@ html {
   padding: 0 3px 0 9px;
   margin: 0 3px 0 0; }
 
-.blue-tag, .most-interesting .items .item .tags a:hover, .content-items .item .tags a:hover, .article .tags a:hover, .event .info .tags a:hover, .event .extra .tags a:hover, .organazer .info .tags a:hover, .form .tags label:hover, .form .tags input:checked + label {
+.blue-tag, .most-interesting .items .item .tags a:hover, .content-items .item .tags a:hover,
+.content-items .item .tags a.active, .article .tags a:hover, .event .info .tags a:hover, .event .extra .tags a:hover, .organazer .info .tags a:hover, .form .tags input:checked + label {
   background-color: #83d0f6;
   background-position: 0 -12px; }
 

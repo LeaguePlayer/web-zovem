@@ -5,19 +5,32 @@
 
 class ArticleController extends FrontController
 {
-    public function actionIndex()
+    public function actionIndex($tag = null)
     {
         $criteria = new CDbCriteria;
-        $criteria->with = 'section';
-        $criteria->with = 'author';
-        $criteria->with = 'tags';
-        $criteria->order = 't.public_date';
-        $articles = Article::model()->published()->findAll();
+        $criteria->with = array();
 
+        $criteria->with[] = 'section';
+        $criteria->with[] = 'author';
+        $criteria->with[] = 'tags';
+
+
+        if ( $tag ) {
+            $ids = Yii::app()->db->createCommand()
+                ->selectDistinct('entity_id')
+                ->from('{{entity_tags}}')
+                ->where('entity_class = "Article" AND tag_id = (select id from {{tags}} where value = :tag)', array(
+                    ':tag' => $tag
+                ))->queryColumn();
+            $criteria->addInCondition('t.id', $ids);
+        }
+        $criteria->order = 't.public_date';
+
+
+        $articles = Article::model()->published()->findAll($criteria);
         $authors = User::model()->hasArticles()->findAll();
         $sections = Section::model()->hasArticles()->findAll();
-        $tags = Tag::model()->hasArticles()->findAll();
-
+        $allTags = Tag::model()->hasArticles()->findAll();
 
         $dataProvider = new CArrayDataProvider($articles, array(
             'pagination' => array(
@@ -29,7 +42,7 @@ class ArticleController extends FrontController
             'dataProvider' => $dataProvider,
             'sections' => $sections,
             'authors' => $authors,
-            'tags' => $tags,
+            'tags' => $allTags,
         ));
     }
 
@@ -50,6 +63,16 @@ class ArticleController extends FrontController
             'authors' => $authors,
             'sections' => $sections,
             'tags' => $tags
+        ));
+    }
+
+
+    public function actionCreate()
+    {
+        $model = new Article;
+
+        $this->render('create', array(
+            'model' => $model
         ));
     }
 }

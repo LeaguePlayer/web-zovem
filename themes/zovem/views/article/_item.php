@@ -15,12 +15,12 @@
     <div class="misc">
         <p class="tags">
             <? foreach ( $data->tags as $tag ): ?>
-                <a href="#" title="<?= $tag->value ?>"><?= $tag->value ?></a>
+                <a<? if ( $tag->value == $_GET['tag'] ) echo ' class="active"' ?> href="<?= $this->createUrl('/article/index', array('tag' => $tag->value)) ?>" title="<?= $tag->value ?>"><?= $tag->value ?></a>
             <? endforeach ?>
         </p>
         <p class="lcomments">
-            <a href="#" class="comments" title="Комментарии">14</a>
-            <a href="#" class="likes liked" title="Нравится">120</a>
+            <a href="#" class="comments" title="Комментарии"><?= $data->comments_count ?></a>
+            <a href="#" class="likes liked" title="Нравится">0</a>
         </p>
     </div>
 </div>

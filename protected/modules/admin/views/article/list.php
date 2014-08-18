@@ -40,7 +40,14 @@ $this->menu=array(
 			'type'=>'raw',
 			'value'=>'SiteHelper::russianDate($data->update_time).\' в \'.date(\'H:i\', $data->update_time)'
 		),
-		array('class'=>'bootstrap.widgets.TbButtonColumn')
+		array(
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+            'buttons' => array(
+                'view' => array(
+                    'url' => 'array("/article/view", "id" => $data->id)'
+                )
+            )
+        )
 	),
 )); ?>
 
