@@ -27,9 +27,9 @@ class CommentsWidget extends CWidget
             switch ( $_POST['CommentWidget']['action'] ) {
                 case 'delete':
                     $id  = $_POST['CommentWidget']['id'];
-                    if ( Comment::model()->deleteByPk($id) ) {
-                        echo CJSON::encode(array('success' => true));
-                        Yii::app()->end();
+                    $comment = Comment::model()->findByPk($id);
+                    if ( $comment !== null ) {
+                        $comment->delete();
                     }
                     break;
             }
