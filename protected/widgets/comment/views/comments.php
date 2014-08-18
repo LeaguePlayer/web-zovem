@@ -14,10 +14,12 @@
         <h2>Комментарии:</h2>
         <div class="items">
             <?php foreach ( $comments as $comment ): ?>
-                <div class="item">
+                <div class="item" data-id="<?= $comment->id ?>" data-comment-type="<?= $comment->type ?>" data-material-id="<?= $comment->material_id ?>">
                     <p class="author">
-                        <a href="#" title="Статьи и комментариии автора <?= $comment->user->fullName ?>"><?= $comment->user->fullName ?></a>
+                        <? $userName = Yii::app()->user->isGuest ? 'Гость' : $comment->user->fullName ?>
+                        <a href="#" title="Статьи и комментариии автора <?= $userName ?>"><?= $userName ?></a>
                         <span class="date"><?= SiteHelper::russianDate($comment->date, false, true) ?></span>
+                        <a class="remove-comment" title="Удалить комментарий" href="#">x</a>
                     </p>
                     <div class="content">
                         <?= $comment->text ?>

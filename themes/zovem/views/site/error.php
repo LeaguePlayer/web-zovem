@@ -1,14 +1,16 @@
 <?php
-/* @var $this SiteController */
-/* @var $error array */
 $this->pageTitle=Yii::app()->name . ' - Error';
-$this->breadcrumbs=array(
-	'Error',
-);
 ?>
 
-<h2>Error <?php echo $code; ?></h2>
+<h1>Страница не найдена</h1>
+<h2>Попробуйте:</h2>
+<p><a href="/" title="Зовём - главная">Перейти на главную</a></p>
+<p><a href="#" title="Куда пойти на этих выходных?">Пойти куда-нибудь на этих выходных</a></p>
+<p><a href="#" title="Где встретиться с друзьями?">Встретиться с друзьями</a></p>
 
-<div class="error">
-<?php echo CHtml::encode($message); ?>
-</div>
+<? if ( YII_DEBUG ): ?>
+    <h2>Error <?= $code; ?></h2>
+    <div class="error">
+        <?= CHtml::encode($message); ?>
+    </div>
+<? endif ?>

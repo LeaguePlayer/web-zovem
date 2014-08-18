@@ -1,0 +1,16 @@
+.pager {
+  text-align: left; }
+  .pager ul {
+    display: inline-block;
+    list-style: none;
+    padding-left: 20px; }
+    .pager ul li {
+      display: inline-block; }
+      .pager ul li.hidden {
+        opacity: 0.5; }
+      .pager ul li a {
+        display: inline-block;
+        padding: 2px 5px;
+        border: 1px solid transparent; }
+      .pager ul li.selected a {
+        border-color: #ff6600; }

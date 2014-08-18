@@ -42,16 +42,15 @@ $this->widget('widgets.event.EventFavorites');
         <div class="article">
             <h1><a href="<?= $article->section->url ?>"><?= $article->section->title ?></a> — <?= $article->title ?></h1>
             <p class="author">
-                <a href="#" title="Статьи и комментариии автора Петров Петр"><?= $article->author->fullName ?></a>
+                <a href="#" title=""><?= $article->author->fullName ?></a>
                 <span class="date"><?= SiteHelper::russianDate($article->public_date, false, true) ?></span>
             </p>
             <div class="content">
                 <?= $article->content ?>
             </div>
             <p class="tags">
-<!--                --><?// var_dump(count($article->tags)); die(); ?>
                 <? foreach ( $article->tags as $tag ): ?>
-                    <a href="#"><?= $tag->value ?></a>
+                    <a href="<?= $this->createUrl('/article/index', array('tag' => $tag->value)) ?>"><?= $tag->value ?></a>
                 <? endforeach ?>
             </p>
             <div class="sharing">
@@ -62,7 +61,7 @@ $this->widget('widgets.event.EventFavorites');
                     <a href="#"><img src="./images/ok.png"></a>
                 </div>
                 <div class="lcomments">
-                    <a href="#" class="comments" title="Комментарии"><?= $article->comments_count ?></a>
+                    <a href="#" class="comments comments-counter" data-comment-type="<?= ArticleComment::TYPE_OF_COMMENT ?>" data-material-id="<?= $article->id ?>" title="Комментарии"><?= $article->comments_count ?></a>
                     <a href="#" class="likes liked" title="Нравится">120</a>
                 </div>
             </div>
@@ -76,24 +75,10 @@ $this->widget('widgets.event.EventFavorites');
         </div>
     </article>
     <div class="right-bar">
-        <h2>Ещё на эту тему:</h2>
-        <ul>
-            <li>
-                <a href="#" title="Статья раздела Кино">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-                <span class="date">Мероприятия, 24 августа</span>
-            </li>
-            <li>
-                <a href="#" title="Статья раздела Кино">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-                <span class="date">Мероприятия, 24 августа</span>
-            </li>
-            <li>
-                <a href="#" title="Статья раздела Кино">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-                <span class="date">Мероприятия, 24 августа</span>
-            </li>
-            <li>
-                <a href="#" title="Статья раздела Кино">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-                <span class="date">Мероприятия, 24 августа</span>
-            </li>
-        </ul>
+        <? $this->widget('widgets.article.ArticlesFeed', array(
+            'criteria' => array(
+                'condition' => 't.id <> ' . $article->id
+            )
+        )) ?>
     </div>
 </div>

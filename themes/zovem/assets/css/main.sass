@@ -869,7 +869,8 @@ $category-icon-width: 39px
 	float: left
 .content-items .item .tags a
 	@extend .gray-tag
-.content-items .item .tags a:hover
+.content-items .item .tags a:hover,
+.content-items .item .tags a.active
 	@extend .blue-tag
 .content-items .item .tags a:active
 	@extend .orange-tag
@@ -1894,8 +1895,8 @@ $category-icon-width: 39px
 	display: none	
 .form .tags label
 	@extend .gray-tag
-.form .tags label:hover
-	@extend .blue-tag
+//.form .tags label:hover
+//	@extend .blue-tag
 .form .tags label:active
 	@extend .orange-tag
 .form .tags input:checked+label

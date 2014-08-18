@@ -7,6 +7,12 @@ class CommentsWidget extends CWidget
 
     protected $user;
 
+    public function init()
+    {
+        parent::init();
+        $this->registerScriptFiles();
+    }
+
     public function run()
     {
         if (!$this->user) $this->user = User::model()->findByPk(Yii::app()->user->getId());
@@ -16,8 +22,21 @@ class CommentsWidget extends CWidget
         $model = new CommentForm();
         if (!$this->user) $model->scenario = 'anonim';
 
-        if(isset($_POST['CommentForm']))
-        {
+
+        if ( isset($_POST['CommentWidget']) ) {
+            switch ( $_POST['CommentWidget']['action'] ) {
+                case 'delete':
+                    $id  = $_POST['CommentWidget']['id'];
+                    if ( Comment::model()->deleteByPk($id) ) {
+                        echo CJSON::encode(array('success' => true));
+                        Yii::app()->end();
+                    }
+                    break;
+            }
+        }
+
+
+        if ( isset($_POST['CommentForm']) ) {
             $model->attributes = $_POST['CommentForm'];
 
             if($model->validate()){
@@ -56,5 +75,15 @@ class CommentsWidget extends CWidget
             'material_id' => $this->material_id,
             'type' => $this->type,
         ));
+    }
+
+
+    protected function registerScriptFiles()
+    {
+        /** @var $cs CClientScript */
+        $assetsUrl = CHtml::asset(__DIR__ . DIRECTORY_SEPARATOR . 'assets');
+        $cs = Yii::app()->clientScript;
+        $cs->registerCssFile($assetsUrl . '/comments.css');
+        $cs->registerScriptFile($assetsUrl . '/comments.js', CClientScript::POS_END);
     }
 }

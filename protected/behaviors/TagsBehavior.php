@@ -9,8 +9,9 @@ class TagsBehavior extends CActiveRecordBehavior
     {
         parent::attach($owner);
         $this->_ownerClass = get_class($owner);
-        $owner->metaData->addRelation('tags', array($owner::MANY_MANY, 'Tag', '{{entity_tags}}(entity_id, tag_id)', 'on'=>'entity_class="'.$this->_ownerClass.'"'));
-        $this->tags_values = CHtml::listData($owner->tags, 'id', 'value');
+        if ( !$owner->metadata->hasRelation('tags') )
+            $owner->metaData->addRelation('tags', array($owner::MANY_MANY, 'Tag', '{{entity_tags}}(entity_id, tag_id)', 'on'=>'entity_class="'.$this->_ownerClass.'"'));
+
     }
 
 
@@ -36,7 +37,7 @@ EOT;
         if ( empty($htmlOptions['label']) ) {
             $htmlOptions['label'] = 'Тема';
         }
-        return TbHtml::textFieldControlGroup('Tags[tags_values]', implode(',', $this->tags_values), $htmlOptions);
+        return TbHtml::textFieldControlGroup('Tags[tags_values]', implode(',', $this->getTagsValues()), $htmlOptions);
     }
 
 
@@ -109,7 +110,16 @@ EOT;
         Yii::app()->db->createCommand()->delete('{{tags}}', 'ref_count=0');
 
         $this->owner->refresh();
-        $this->tags_values = CHtml::listData($this->owner->tags, 'id', 'value');
+        $this->tags_values = null;
+    }
+
+
+    protected function getTagsValues()
+    {
+        if ( $this->tags_values === null ) {
+            $this->tags_values = CHtml::listData($this->owner->tags, 'id', 'value');
+        }
+        return $this->tags_values;
     }
 
 
