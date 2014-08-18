@@ -1,16 +1,23 @@
 <?php
+/**
+ * @var $this FrontController
+ */
+    $cs = Yii::app()->clientScript;
 
-	$cs = Yii::app()->clientScript;
+    $select2Assets = $this->getAssetsUrl('application.extensions.yiiwheels.widgets.select2');
+    $cs->registerCssFile($select2Assets.'/css/select2.css');
+    $cs->registerScriptFile($select2Assets.'/js/select2.js', CClientScript::POS_END);
 
-	$cs->registerCssFile($this->getAssetsUrl('application').'/css/normalize.css');
-	$cs->registerCssFile($this->getAssetsUrl('application').'/css/main.css');
-
-	$cs->registerScriptFile($this->getAssetsUrl('application').'/js/jquery-1.11.0.min.js');
-	$cs->registerScriptFile($this->getAssetsUrl('application').'/js/jquery.sudoSlider.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile($this->getAssetsUrl('application').'/js/ui/minified/jquery-ui.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile($this->getAssetsUrl('application').'/js/jquery.timepicker.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile($this->getAssetsUrl('application').'/js/main.js', CClientScript::POS_END);
-
+    $appAssets = $this->getAssetsUrl('application');
+	$cs->registerCssFile($appAssets.'/css/normalize.css');
+	$cs->registerCssFile($appAssets.'/css/main.css');
+	$cs->registerCssFile($appAssets.'/css/select2/select2-theme.css');
+	$cs->registerScriptFile($appAssets.'/js/jquery-1.11.0.min.js');
+	$cs->registerScriptFile($appAssets.'/js/jquery.sudoSlider.min.js', CClientScript::POS_END);
+	$cs->registerScriptFile($appAssets.'/js/ui/minified/jquery-ui.min.js', CClientScript::POS_END);
+	$cs->registerScriptFile($appAssets.'/js/jquery.timepicker.min.js', CClientScript::POS_END);
+    $cs->registerScriptFile($appAssets.'/js/jquery.filter-form.js', CClientScript::POS_END);
+    $cs->registerScriptFile($appAssets.'/js/main.js', CClientScript::POS_END);
 	$cs->registerScriptFile('http://api-maps.yandex.ru/1.1/index.xml?key=AEAea1MBAAAAyd1ldgMAHHvA10B6zZQqEfjYbZ6Mg2mBIjkAAAAAAAAAAABlFElqSbqpo8bwi1IXkRrPYTpSWA==', CClientScript::POS_END);
 
 

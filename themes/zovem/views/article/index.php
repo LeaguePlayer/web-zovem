@@ -5,6 +5,7 @@
  * @var $authors User[]
  * @var $this ArticleController
  * @var $tags Tag[]
+ * @var $articleFilter Article
  */
 ?>
 
@@ -13,41 +14,50 @@
     $this->widget('widgets.event.EventFavorites');
 ?>
 
+<? /** @var $filterForm CActiveForm */
+$filterForm = $this->beginWidget('CActiveForm', array(
+    'id' => 'article-filter',
+    'htmlOptions' => array(
+        'class' => 'filter'
+    )
+)) ?>
 
-<div class="filter">
     <div class="left-bar">
         <ul>
-            <li role="dropdown-parent">
-                <a href="#" title="Выберите раздел" role="dropdown-trigger">Раздел</a>
-                <div class="noshadow" style="display: none; width: 110px;"></div>
-                <ul class="dropdown-list" style="display: none;">
-                    <? foreach ( $sections as $section ): ?>
-                        <li><a href="#"><?= $section->title ?></a></li>
-                    <? endforeach ?>
-                </ul>
-            </li>
-            <li role="dropdown-parent">
-                <a href="#" title="Выберите автора" role="dropdown-trigger">Автор</a>
-                <div class="noshadow" style="display: none; width: 136px;"></div>
-                <ul class="dropdown-list" style="display: none;">
-                    <? foreach ( $authors as $author ): ?>
-                        <li><a href="#"><?= $author->fullName ?></a></li>
-                    <? endforeach ?>
-                </ul>
-            </li>
+            <? if ( count($sections) ): ?>
+                <li role="dropdown-parent">
+                    <?= $filterForm->dropDownList($articleFilter, 'section_id', CHtml::listData($sections, 'id', 'title'), array(
+                        'empty' => '',
+                        'placeholder' => $articleFilter->getAttributeLabel('section_id')
+                    )) ?>
+                </li>
+            <? endif ?>
+
+            <? if ( count($authors) ): ?>
+                <li role="dropdown-parent">
+                    <?= $filterForm->dropDownList($articleFilter, 'user_id', CHtml::listData($authors, 'id', 'fullName'), array(
+                        'empty' => '',
+                        'placeholder' => $articleFilter->getAttributeLabel('user_id')
+                    )) ?>
+                </li>
+            <? endif ?>
+
             <li role="dropdown-parent">
                 <a href="#" title="Выберите дату" role="dropdown-trigger">Сб 7 декабря</a>
                 <div class="noshadow" style="width: 136px;"></div>
             </li>
-            <li role="dropdown-parent">
-                <a href="#" title="Выберите тему" role="dropdown-trigger">Тема</a>
-                <div class="noshadow" style="width: 136px;"></div>
-                <ul class="dropdown-list">
-                    <? foreach ( $tags as $tag ): ?>
-                        <li><a href="<?= $this->createUrl('/article/index', array('tag' => $tag->value)) ?>"><?= $tag->value ?></a></li>
-                    <? endforeach ?>
-                </ul>
-            </li>
+
+            <? if ( count($tags) ): ?>
+                <li role="dropdown-parent">
+                    <a href="#" title="Выберите тему" role="dropdown-trigger">Тема</a>
+                    <div class="noshadow" style="width: 136px;"></div>
+                    <ul class="dropdown-list">
+                        <? foreach ( $tags as $tag ): ?>
+                            <li><a href="<?= $this->createUrl('/article/index', array('tag' => $tag->value)) ?>"><?= $tag->value ?></a></li>
+                        <? endforeach ?>
+                    </ul>
+                </li>
+            <? endif ?>
         </ul>
     </div>
     <div class="right-bar">
@@ -65,7 +75,8 @@
             </li>
         </ul>
     </div>
-</div>
+
+<? $this->endWidget() ?>
 
 
 

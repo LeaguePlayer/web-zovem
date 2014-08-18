@@ -151,6 +151,7 @@ class Comment extends CActiveRecord
 
         if ( $this->isNewRecord ) {
             $this->date = date('Y-m-d H:i:s');
+            $this->user_id = Yii::app()->user->id;
         }
 
         return parent::beforeSave();

@@ -16,10 +16,13 @@
             <?php foreach ( $comments as $comment ): ?>
                 <div class="item" data-id="<?= $comment->id ?>" data-comment-type="<?= $comment->type ?>" data-material-id="<?= $comment->material_id ?>">
                     <p class="author">
-                        <? $userName = Yii::app()->user->isGuest ? 'Гость' : $comment->user->fullName ?>
+                        <? $userName = $comment->user === null ? 'Гость' : $comment->user->fullName ?>
                         <a href="#" title="Статьи и комментариии автора <?= $userName ?>"><?= $userName ?></a>
                         <span class="date"><?= SiteHelper::russianDate($comment->date, false, true) ?></span>
-                        <a class="remove-comment" title="Удалить комментарий" href="#">x</a>
+
+                        <? if ( Yii::app()->user->checkAccess('comment.delete') || Yii::app()->user->id === $comment->user_id ): ?>
+                            <a class="remove-comment" title="Удалить комментарий" href="#">x</a>
+                        <? endif ?>
                     </p>
                     <div class="content">
                         <?= $comment->text ?>

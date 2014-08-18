@@ -58,18 +58,24 @@ class Controller extends CController
     protected $assetsUrl;
     protected $assetsMap = array();
     protected $forceCopyAssets = true;
-    public function getAssetsUrl($moduleName = false)
+    public function getAssetsUrl($pathAlias = false)
     {
-        if ( $moduleName ) {
-            if ( !isset($this->assetsMap[$moduleName]) ) {
-                if ( $moduleName === 'application' and isset(Yii::app()->theme) ) {
+        if ( $pathAlias ) {
+            if ( !isset($this->assetsMap[$pathAlias]) ) {
+                if ( $pathAlias === 'application' and isset(Yii::app()->theme) ) {
+                    // application
                     $assetsPath = Yii::app()->theme->getBasePath().DIRECTORY_SEPARATOR.'assets';
                 } else {
-                    $assetsPath = Yii::getPathOfAlias($moduleName.'.assets');
+                    // module
+                    $assetsPath = Yii::getPathOfAlias($pathAlias.'.assets');
                 }
-                $this->assetsMap[$moduleName] = Yii::app()->assetManager->publish($assetsPath, false, -1, $this->forceCopyAssets);
+//                if ( !$assetsPath ) {
+//                    // other path
+//                    $assetsPath = Yii::getPathOfAlias($pathAlias);
+//                }
+                $this->assetsMap[$pathAlias] = Yii::app()->assetManager->publish($assetsPath, false, -1, $this->forceCopyAssets);
             }
-            return $this->assetsMap[$moduleName];
+            return $this->assetsMap[$pathAlias];
         }
 
         if ( !isset($this->assetsUrl) )
