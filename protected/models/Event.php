@@ -42,6 +42,15 @@ class Event extends Material
             return $types;
     }
 
+    public function scopes()
+    {
+        return array(
+            'published' => array(
+                'condition' => 't.status='.self::STATUS_PUBLISHED,
+            ),
+        );
+    }
+
     public function tableName()
     {
         return '{{event}}';

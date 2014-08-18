@@ -2,6 +2,8 @@
 
 class SiteHelper {
 
+	private static $days = array('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье');
+
 	public static function translit($str) {
 		$tr = array(
 			"А" => "a", "Б" => "b", "В" => "v", "Г" => "g",
@@ -113,10 +115,15 @@ class SiteHelper {
             $out .= ' ' . $date[2];
         }
         if ( $outTime ) {
-            $out .= ', в ' . date('H:i');
+            $out .= ' в ' . date('H:i');
         }
 		return $out;
 	}
+
+    public static function russianDayTime($datetime)
+    {
+    	return self::$days[date('w', strtotime($datetime))-1] .' '.date("H:i", strtotime($datetime));
+    }
 
 	public static function sendMail($subject,$message,$to='',$from='')
     {
@@ -152,4 +159,6 @@ class SiteHelper {
         else
             return mb_substr($_str, 0, $maxlen, 'UTF-8').' '.$endintro;
     }
+
+
 }

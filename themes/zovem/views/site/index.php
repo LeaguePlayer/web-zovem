@@ -25,7 +25,7 @@
           	<? foreach($section->events as $event) :?>
             <li<? if($event->current_contents->type):?> class="active"<?endif;?>>
               <p class="link">
-                <a href="/event/<?= $event->id;?>" title="<?= $event->current_contents->title; ?>"><?= $event->current_contents->title; ?></a>
+                <a href="/event/view/time_id/<?= $event->current_contents->times[0]->id;?>" title="<?= $event->current_contents->title; ?>"><?= $event->current_contents->title; ?></a>
                 <span class="date"><?= SiteHelper::russianDate($event->current_contents->times[0]->start_datetime, false); ?></span>
               </p>
               <p class="tags">

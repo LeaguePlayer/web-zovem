@@ -68,6 +68,7 @@ class Contents extends EActiveRecord
             'time'=>array(self::HAS_ONE, 'Time', 'contents_id'),
             'event'=>array(self::HAS_ONE, 'Event', 'contents_id'),
             'times'=>array(self::HAS_MANY, 'Time', 'contents_id'),
+            'section'=>array(self::BELONGS_TO, 'Section', 'section_id'),
         );
     }
 
@@ -132,9 +133,12 @@ class Contents extends EActiveRecord
 					'icon' => array(
 						'centeredpreview' => array(90, 90),
 					),
-					'small' => array(
-						'resize' => array(200, 180),
-					)
+                    'small' => array(
+                        'resize' => array(200, 180),
+                    ),
+                    'normal' => array(
+                        'resize' => array(110),
+                    )
 				),
 			),
 			'CTimestampBehavior' => array(
@@ -143,6 +147,9 @@ class Contents extends EActiveRecord
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
 			),
+            'TagsBehavior' => array(
+                'class' => 'application.behaviors.TagsBehavior'
+            ),
         ));
     }
 

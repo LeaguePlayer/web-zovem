@@ -54,7 +54,7 @@
 
 	<?php echo $form->textAreaControlGroup($contents,'terms',array('rows'=>10, 'class'=>'span12')); ?>
 	
-	<!-- ЗДЕСЬ БУДУТ ТЕГИ -->
+	<?php echo $contents->tagsWidget(array('class'=>'span12', 'style' => 'width:100%')) ?>
 
 	
 

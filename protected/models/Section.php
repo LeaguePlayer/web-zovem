@@ -12,6 +12,7 @@
     * @property string $update_time
     * @property integer $node_id
     * @property string $img_icon
+    * @property string $img_map
 */
 class Section extends EActiveRecord
 {
@@ -26,10 +27,10 @@ class Section extends EActiveRecord
         return array(
             array('title', 'required'),
             array('status, sort, node_id', 'numerical', 'integerOnly'=>true),
-            array('title, img_icon', 'length', 'max'=>255),
+            array('title, img_icon, img_map', 'length', 'max'=>255),
             array('create_time, update_time', 'safe'),
             // The following rule is used by search().
-            array('id, title, status, sort, create_time, update_time, node_id, img_icon', 'safe', 'on'=>'search'),
+            array('id, title, status, sort, create_time, update_time, node_id, img_icon, img_map', 'safe', 'on'=>'search'),
         );
     }
 
@@ -71,6 +72,7 @@ class Section extends EActiveRecord
             'update_time' => 'Дата последнего редактирования',
             'node_id' => 'Ссылка на раздел',
             'img_icon' => 'Иконка',
+            'img_map' => 'Иконка для карты',
         );
     }
 
@@ -81,6 +83,18 @@ class Section extends EActiveRecord
 			'imgBehaviorIcon' => array(
 				'class' => 'application.behaviors.UploadableImageBehavior',
 				'attributeName' => 'img_icon',
+				'versions' => array(
+					'icon' => array(
+						'centeredpreview' => array(90, 90),
+					),
+					'small' => array(
+						'resize' => array(200, 180),
+					)
+				),
+			),
+			'imgBehaviorMap' => array(
+				'class' => 'application.behaviors.UploadableImageBehavior',
+				'attributeName' => 'img_map',
 				'versions' => array(
 					'icon' => array(
 						'centeredpreview' => array(90, 90),
@@ -110,6 +124,7 @@ class Section extends EActiveRecord
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('node_id',$this->node_id);
 		$criteria->compare('img_icon',$this->img_icon,true);
+		$criteria->compare('img_map',$this->img_map,true);
         $criteria->order = 'sort';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -147,4 +162,6 @@ class Section extends EActiveRecord
     {
         return Yii::app()->urlManager->createUrl('/sections/view', array('id' => $this->id));
     }
+    
+
 }

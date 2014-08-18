@@ -143,7 +143,7 @@ class Article extends EActiveRecord implements ICommentDepends
     	if (parent::beforeSave()) {
             if ( empty($this->annotate) ) {
                 $this->annotate = SiteHelper::intro($this->content, 400, '...');
-                $this->update('annotate');
+                //$this->update('annotate');
             }
     		return true;
     	}
