@@ -432,23 +432,3 @@ jQuery(function($){
 	$.datepicker.setDefaults($.datepicker.regional['ru']);
 });
 
-
-        window.onload = function () {
-        	if (document.getElementById("YMapsID")) {
-            	var map = new YMaps.Map(document.getElementById("YMapsID"));
-            	map.setCenter(new YMaps.GeoPoint(37.64, 55.76), 10);
-	            var s = new YMaps.Style();
-	            s.iconStyle = new YMaps.IconStyle();
-	            s.iconStyle.href = "http://zovem.amobile2.tmweb.ru/img/map-icon-dinner.png";
-	            s.iconStyle.size = new YMaps.Point(40, 46);
-	            s.iconStyle.offset = new YMaps.Point(-20, -46);
-
-	            s.iconStyle.shadow = new YMaps.IconShadowStyle();
-				s.iconStyle.shadow.href = "http://zovem.amobile2.tmweb.ru/img/map-icon-shadow.png";
-				s.iconStyle.shadow.size = new YMaps.Point(73, 37);
-				s.iconStyle.shadow.offset = new YMaps.Point(-22, -33);
-
-	            var placemark = new YMaps.Placemark(map.getCenter(), {style: s});
-	            map.addOverlay(placemark);
-        	}
-        }

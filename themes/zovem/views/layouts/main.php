@@ -18,8 +18,6 @@
 	$cs->registerScriptFile($appAssets.'/js/jquery.timepicker.min.js', CClientScript::POS_END);
     $cs->registerScriptFile($appAssets.'/js/jquery.filter-form.js', CClientScript::POS_END);
     $cs->registerScriptFile($appAssets.'/js/main.js', CClientScript::POS_END);
-	$cs->registerScriptFile('http://api-maps.yandex.ru/1.1/index.xml?key=AEAea1MBAAAAyd1ldgMAHHvA10B6zZQqEfjYbZ6Mg2mBIjkAAAAAAAAAAABlFElqSbqpo8bwi1IXkRrPYTpSWA==', CClientScript::POS_END);
-
 
 ?><!DOCTYPE html>
 <!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
