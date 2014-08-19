@@ -40,7 +40,7 @@
     <header>
       <div class="header">
         <div class="logo">
-          <a href="#" title="Зовём"></a>
+          <a href="/" title="Зовём"></a>
         </div>
         <div class="city" role="dropdown-parent">
           <a href="#" role="dropdown-trigger">Москва</a>
@@ -63,6 +63,8 @@
       </div>
     </header>
 
+
+    <? $this->widget('widgets.event.EventFavorites'); ?>
     <?= $this->renderFilter(); ?>
     <?= $content; ?>
 

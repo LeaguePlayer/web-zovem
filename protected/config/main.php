@@ -158,6 +158,9 @@ return array_replace_recursive(
                     )
                 )
             ),
+            'session' => array(
+                'autoStart' => true,
+            ),
         ),
         'params'=>array(),
     ),

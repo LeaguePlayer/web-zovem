@@ -13,6 +13,7 @@
     * @property integer $node_id
     * @property string $img_icon
     * @property string $img_map
+    * @property string $img_active
 */
 class Section extends EActiveRecord
 {
@@ -27,10 +28,10 @@ class Section extends EActiveRecord
         return array(
             array('title', 'required'),
             array('status, sort, node_id', 'numerical', 'integerOnly'=>true),
-            array('title, img_icon, img_map', 'length', 'max'=>255),
+            array('title, img_icon, img_map, img_active', 'length', 'max'=>255),
             array('create_time, update_time', 'safe'),
             // The following rule is used by search().
-            array('id, title, status, sort, create_time, update_time, node_id, img_icon, img_map', 'safe', 'on'=>'search'),
+            array('id, title, status, sort, create_time, update_time, node_id, img_icon, img_map, img_active', 'safe', 'on'=>'search'),
         );
     }
 
@@ -72,6 +73,7 @@ class Section extends EActiveRecord
             'update_time' => 'Дата последнего редактирования',
             'node_id' => 'Ссылка на раздел',
             'img_icon' => 'Иконка',
+            'img_active' => 'Оранжевая иконка',
             'img_map' => 'Иконка для карты',
         );
     }
@@ -104,6 +106,18 @@ class Section extends EActiveRecord
 					)
 				),
 			),
+			'imgBehaviorActive' => array(
+				'class' => 'application.behaviors.UploadableImageBehavior',
+				'attributeName' => 'img_active',
+				'versions' => array(
+					'icon' => array(
+						'centeredpreview' => array(90, 90),
+					),
+					'small' => array(
+						'resize' => array(200, 180),
+					)
+				),
+			),
 			'CTimestampBehavior' => array(
 				'class' => 'zii.behaviors.CTimestampBehavior',
                 'createAttribute' => 'create_time',
@@ -125,6 +139,7 @@ class Section extends EActiveRecord
 		$criteria->compare('node_id',$this->node_id);
 		$criteria->compare('img_icon',$this->img_icon,true);
 		$criteria->compare('img_map',$this->img_map,true);
+		$criteria->compare('img_active',$this->img_active,true);
         $criteria->order = 'sort';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -146,15 +161,17 @@ class Section extends EActiveRecord
                 'events'=>array(
                     'limit' => 5,
                     'condition' => 'events.status = '.Event::STATUS_PUBLISHED,
+                    'joinType'=>'INNER JOIN',
                 ),
                 'events.times'=>array(
                     'limit'=>1,
                     'order'=>'times.start_datetime ASC',
                     'condition'=>'times.end_datetime >= NOW()',
+                    'joinType'=>'INNER JOIN',
                 ),
                 'events.current_contents',
             )
-        )->findAll();//->published()->sorted()->findAll();
+        )->findAll();
     }
 
 
@@ -162,6 +179,5 @@ class Section extends EActiveRecord
     {
         return Yii::app()->urlManager->createUrl('/sections/view', array('id' => $this->id));
     }
-    
 
 }

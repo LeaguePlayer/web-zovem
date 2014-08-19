@@ -212,8 +212,13 @@ class EventController extends AdminController
 
     public function actionDynamiccities()
 	{
+		$model = 'Contents';
+		if (!isset($_POST[$model]))
+			$model = 'Organiser';
+
+
 	    $data=City::model()->findAll('country_id=:country_id', 
-	           array(':country_id'=>(int) $_POST['Contents'] ['country_id']));
+	           array(':country_id'=>(int) $_POST[$model] ['country_id']));
 	 
 	    $data=CHtml::listData($data,'id','title');
 	    echo CHtml::tag('option',
@@ -227,8 +232,12 @@ class EventController extends AdminController
 
     public function actionDynamicmetros()
 	{
+		$model = 'Contents';
+		if (!isset($_POST[$model]))
+			$model = 'Organiser';
+
 	    $data=Metro::model()->findAll('city_id=:city_id', 
-	           array(':city_id'=>(int) $_POST['Contents'] ['city_id']));
+	           array(':city_id'=>(int) $_POST[$model] ['city_id']));
 	 
 	    $data=CHtml::listData($data,'id','title');
 	    echo CHtml::tag('option',

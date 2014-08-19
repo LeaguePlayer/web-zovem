@@ -34,12 +34,57 @@ class Time extends EActiveRecord
         );
     }
 
+    public function scopes()
+    {
+        return array(
+            'ordered' => array(
+                'order'=>'start_datetime ASC',
+            ),
+            'unique'=>array(
+                'limit' => 1,
+            ),
+            'startsToday' => array(
+                'condition'=>'date = DATE(NOW()) AND start_datetime >= NOW()',
+            ),
+            'alreadyStarts' => array(
+                'condition'=>'start_datetime <= NOW() AND end_datetime >= NOW() ',
+            ),
+            'future' => array(
+                'condition'=>'date > CURDATE()',
+            ),
+        );
+    }
+
+    public function inDay($day)
+    {
+        $this->getDbCriteria()->mergeWith(array(
+            'condition'=>'date = '.$day,
+        ));
+        return $this;
+    }
+
+    public function when($when)
+    {
+        if ($when == 'now') {
+            return $this->startsToday();
+        } 
+        else if ($when == 'already') {
+            return $this->alreadyStarts();
+        }
+        else if ($when == 'future') {
+            return $this->future();
+        }
+        else if (is_string($when)) {
+            return $this->inDay(date('Y-m-d', strtotime($when)));
+        }
+    }
 
     public function relations()
     {
         return array(
             'contents'=>array(self::BELONGS_TO, 'Contents', 'contents_id'),
             'event'=>array(self::BELONGS_TO, 'Event', 'event_id'),
+            'favorites'=>array(self::HAS_MANY, 'Favorite', 'time_id'),
         );
     }
 
@@ -107,6 +152,71 @@ class Time extends EActiveRecord
             'end_datetime' => $this->date . ' ' . $this->end_time,
         ));
         return parent::afterSave();
+    }
+
+    public function inFavorites($user)
+    {
+        if (Yii::app()->user->isGuest) {
+            return ! is_null(Yii::app()->session['Favorites_'.$this->id]);
+        }
+        else {
+            return ! is_null(Favorite::model()->find('user_id=:user_id AND time_id=:time_id', array(
+                ':user_id' => $user->id,
+                ':time_id' => $this->id,
+            )));
+        }
+    }
+
+    public static function getFavoritesCriteria()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->together = true;
+        $criteria->with = array();
+
+        $criteria->with['event'] = array(
+            'alias' => 'e',
+            'condition' => 'e.status = '.Event::STATUS_PUBLISHED,
+            'joinType'=>'INNER JOIN',
+        );
+        $criteria->with[] = 'event.current_contents';
+        $criteria->with[] = 'event.current_contents.section';
+
+        if (! Yii::app()->user->isGuest)
+            $criteria->with['favorites'] = array(
+                'alias' => 'f',
+                'condition' => 'f.user_id = '.Yii::app()->user->id,
+                'select' => false,
+                'joinType'=>'INNER JOIN',
+            );
+        else {
+            $ids = Time::getFavoriteIds();
+            if (!empty($ids))
+                $criteria->with['favorites'] = array(
+                    'alias' => 'f',
+                    'condition' => 'f.time_id IN ('.join(',', $ids).')',
+                    'select' => false,
+                    'joinType'=>'INNER JOIN',
+                );
+            else 
+                $criteria->with['favorites'] = array(
+                    'alias' => 'f',
+                    'condition' => 'f.time_id IN (-1)', //здраааааавствуйте
+                    'select' => false,
+                    'joinType'=>'INNER JOIN',
+                );
+        }
+        return $criteria;
+    }
+
+    public static function getFavoriteIds()
+    {
+        $result = array();
+        foreach (Yii::app()->session as $record) {
+            $prefix = 'Favorites_';
+            if (strpos($record, $prefix) !== false)
+                $result[] = substr($record, strlen($prefix));
+        }
+        return $result;
     }
 
 

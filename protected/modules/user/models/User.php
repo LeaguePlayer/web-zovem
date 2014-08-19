@@ -80,6 +80,8 @@ class User extends CActiveRecord
         if (!isset($relations['profile']))
             $relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
         $relations['articles'] = array(self::HAS_MANY, 'Article', 'user_id');
+        $relations['organiser'] = array(self::HAS_ONE, 'Organiser', 'user_id');
+        $relations['events'] = array(self::HAS_MANY, 'Event', 'user_id');
         return $relations;
 	}
 
@@ -224,6 +226,28 @@ class User extends CActiveRecord
 
     public function getFullName() {
     	return $this->profile->first_name.' '.$this->profile->last_name;
+    }
+
+    public static function getListNonOrganisers($user_id = null)
+    {
+    	$users = self::model()
+	    	->active()
+	    	->with(array(
+	    		'organiser' => array(
+			        'joinType'=>'LEFT JOIN', 
+			        'condition'=>'`organiser`.`user_id` is NULL',
+	    		), 
+	    	))
+	    	->findAll();
+    	$result = array();
+    	foreach ($users as $user) {
+    		$result[$user->id] = $user->getFullName();
+    	}
+    	if (!is_null($user_id)) {
+    		$user = User::model()->findByPk($user_id);
+    		$result[$user->id] = $user->getFullName();
+    	}
+    	return $result;
     }
     
 }

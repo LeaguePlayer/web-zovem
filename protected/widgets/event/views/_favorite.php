@@ -1,9 +1,11 @@
-<div class="event-preview" style="float: left; list-style: none; display: block; position: relative; margin: 0px;">
-    <h2><a href="#" title="кино Хоббит: Пустошь Смауга в Планета кино">Хоббит: Пустошь Смауга</a></h2>
-    <p class="type">кино</p>
+<div class="event-preview">
+    <h2><a href="/event/view/time_id/<?= $data->id;?>" title="<?= $data->event->current_contents->title?>"><?= $data->event->current_contents->title?></a></h2>
+    <p class="type"><?= $data->event->current_contents->section->title; ?></p>
     <dl>
+    <? if (! $data->event->current_contents->is_free && $data->event->current_contents->price): ?>
         <dt>Цена:</dt>
-        <dd>500 р</dd>
+        <dd><?= $data->event->current_contents->price ;?></dd>
+    <? endif; ?>
         <dt>Когда:</dt>
         <dd>30 сентября</dd>
         <dt>Где:</dt>

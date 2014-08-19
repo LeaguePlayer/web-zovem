@@ -145,6 +145,8 @@ class Article extends EActiveRecord implements ICommentDepends
                 $this->annotate = SiteHelper::intro($this->content, 400, '...');
                 //$this->update('annotate');
             }
+            if ($this->isNewRecord)
+                $this->user_id = Yii::app()->user->id;
     		return true;
     	}
     	return false;

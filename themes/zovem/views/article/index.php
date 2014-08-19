@@ -9,10 +9,6 @@
 ?>
 
 
-<?php
-    $this->widget('widgets.event.EventFavorites');
-?>
-
 
 <div class="filter">
     <div class="left-bar">

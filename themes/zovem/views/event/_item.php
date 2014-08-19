@@ -5,8 +5,9 @@
   <p class="preview"><?= $data->event->current_contents->city->title .', ' .$data->event->current_contents->address;?></p>
   <div class="misc">
     <p class="tags">
-      <a href="#" title="тэг Детям">Детям</a>
-      <a href="#" title="тэг Семейный">Семейный</a>
+        <? foreach ( $data->event->current_contents->tags as $tag ): ?>
+            <a href="<?= $this->createUrl('/event/index', array('tag' => $tag->value)) ?>"><?= $tag->value ?></a>
+        <? endforeach ?>
     </p>
     <p class="lcomments">
       <a href="#" class="comments" title="Комментарии">14</a>

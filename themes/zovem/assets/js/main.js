@@ -182,6 +182,18 @@ $(document).ready(function(){
 	if ($("body").hasClass("ie8")) {
 		$('.onoffswitch').removeClass('onoffswitch').addClass('ieswitch');
 	}
+
+	/* Добавление в избранное */
+	if ($('.addToFavorites').length) {
+		$('.addToFavorites').on('click', function(){
+			var _that = $(this);
+			$.post("/event/addToFavorites/time_id/"+$(this).data('id'), function(){
+				alert('Мероприятие было успешно добавлено в избранное.');
+				_that.after('<span class="button">В избранном</span>').remove();
+			});
+			return false;
+		});
+	}
 });
 
 function GeneticMisc() {

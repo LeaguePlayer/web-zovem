@@ -29,6 +29,11 @@ $this->menu=array(
 		    'checkBoxHtmlOptions' => array('class' => 'checkclass'),
 		),
 		array(
+			'name' => 'current_contents.section_id',
+			'value' => '$data->current_contents->section->title',
+			'type' => 'raw',
+		),
+		array(
 			'name' => 'current_contents.title',
 			'value' => '$data->current_contents->title',
 			'type' => 'raw',

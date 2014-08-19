@@ -27,7 +27,7 @@ $this->menu=array(
 		array(
 			'header'=>'Иконка',
 			'type'=>'raw',
-			'value'=>'TbHtml::imageCircle($data->imgBehaviorIcon->getImageUrl("icon"))'
+			'value'=>'TbHtml::image($data->imgBehaviorIcon->getImageUrl())'
 		),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',

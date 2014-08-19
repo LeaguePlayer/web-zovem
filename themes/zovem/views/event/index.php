@@ -1,7 +1,4 @@
 
-<?php
-$this->widget('widgets.event.EventFavorites');
-?>
 
 
     <div class="filter">
@@ -47,12 +44,12 @@ $this->widget('widgets.event.EventFavorites');
     <div class="events-list">
       <div class="left-bar">
         <ul>
-          <li class="current">
-            <a href="#">Начинаются сегодня</a>
+          <li<? if ($when == 'now'): ?> class="current"<? endif; ?>>
+            <a href="/event/index/when/now">Начинаются сегодня</a>
           </li>
-          <li><a href="#">Уже идут в этот день</a></li>
-          <li><a href="#">Будут идти</a></li>
-          <li><a href="#">Статьи</a></li>
+          <li<? if ($when == 'already'): ?> class="current"<? endif; ?>><a href="/event/index/when/already">Уже идут в этот день</a></li>
+          <li<? if ($when == 'future'): ?> class="current"<? endif; ?>><a href="/event/index/when/future">Будут идти</a></li>
+          <li><a href="/article/">Статьи</a></li>
         </ul>
       </div>
 

@@ -967,9 +967,12 @@ $category-icon-width: 39px
 .button:hover
 	background-color: $underline-color
 	color: white
-.button:active
+.button:active, .button:hover
 	background-color: $main-color
 	color: white
+span.button
+	background-color: $main-color !important
+	color: white !important
 .comments textarea
 	@extend .boxsizing-border
 	width: 100%

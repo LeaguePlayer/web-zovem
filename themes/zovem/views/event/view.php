@@ -1,8 +1,4 @@
 
-<?php
-$this->widget('widgets.event.EventFavorites');
-?>
-
 
     <div class="event">
       <div class="float-fix">
@@ -24,9 +20,9 @@ $this->widget('widgets.event.EventFavorites');
           	<?= $event->current_contents->wswg_body; ?>
           </div>
             <p class="tags">
-                <!--<? //foreach ( $event->tags as $tag ): ?>
-                    <a href="#"><?//= $tag->value ?></a>
-                <? //endforeach ?>-->
+                <? foreach ( $event->current_contents->tags as $tag ): ?>
+                    <a href="<?= $this->createUrl('/event/index', array('tag' => $tag->value)) ?>"><?= $tag->value ?></a>
+                <? endforeach ?>
             </p>
           <div class="invitation">
             <div class="invite">
@@ -39,7 +35,11 @@ $this->widget('widgets.event.EventFavorites');
               </div>
               <label for="myonoffswitch">Пригласить друзей на мероприятие</label>
             </div>
-            <a href="" class="button">Обязательно пойду</a>
+            <? if ($time->inFavorites(Yii::app()->user)): ?>
+            <span class="button">В избранном</span>
+            <? else: ?>
+            <a href="#" class="button addToFavorites" data-id="<?= $time->id;?>">Добавить в избранное</a>
+            <? endif; ?>
           </div>
         </div>
       </div>

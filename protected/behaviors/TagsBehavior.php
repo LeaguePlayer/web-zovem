@@ -37,7 +37,7 @@ EOT;
         if ( empty($htmlOptions['label']) ) {
             $htmlOptions['label'] = 'Темы';
         }
-        return TbHtml::textFieldControlGroup('Tags[tags_values]', implode(',', $this->getTagsValues()), $htmlOptions);
+        return '<div class="well">Для добавления новой темы нажмите Enter после ввода.</div>'.TbHtml::textFieldControlGroup('Tags[tags_values]', implode(',', $this->getTagsValues()), $htmlOptions);
     }
 
 
@@ -77,7 +77,7 @@ EOT;
 
 
         // обновляем ассоциативную таблицу и счетчики
-        $exist_ids = Chtml::listData($this->owner->tags, 'id', 'id');
+        $exist_ids = CHtml::listData($this->owner->tags, 'id', 'id');
         $new_ids = array_diff($post_ids, $exist_ids);
         $old_ids = array_diff($exist_ids, $post_ids);
 
@@ -124,10 +124,12 @@ EOT;
 
 
     public function afterDelete($event) {
-        Yii::app()->db->createCommand()->delete('{{entity_tags}}', 'entity_class="' . $this->_ownerClass . '" AND entity_id='.$this->owner->id);
-        $criteria = new CDbCriteria();
-        $criteria->addInCondition('id', array_keys($this->tags_values));
-        Tag::model()->updateCounters(array('ref_count' => -1), $criteria);
-        Yii::app()->db->createCommand()->delete('{{tags}}', 'ref_count=0');
+        if ($this->tags_values) {
+            Yii::app()->db->createCommand()->delete('{{entity_tags}}', 'entity_class="' . $this->_ownerClass . '" AND entity_id='.$this->owner->id);
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('id', array_keys($this->tags_values));
+            Tag::model()->updateCounters(array('ref_count' => -1), $criteria);
+            Yii::app()->db->createCommand()->delete('{{tags}}', 'ref_count=0');
+        }
     }
 }

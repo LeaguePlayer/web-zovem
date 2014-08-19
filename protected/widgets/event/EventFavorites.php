@@ -15,16 +15,19 @@ class EventFavorites extends CWidget
 
     public function run()
     {
-        $criteria = new CDbCriteria();
-        $dataProvider = new CActiveDataProvider('Event', array(
+        $criteria = Time::getFavoritesCriteria();
+
+        $times = Time::model()->findAll($criteria);
+
+        $dataProvider = new CActiveDataProvider('Time', array(
             'criteria' => $criteria,
             'pagination' => false
         ));
+
         $this->widget('zii.widgets.CListView', array(
             'dataProvider' => $dataProvider,
-            'template' => '<div class="slider" style="position: relative; overflow: hidden;">' .
-            '   {items}' .
-            '</div>',
+            'template' => "{items}",
+            'itemsCssClass' => 'slider',
             'itemView' => '_favorite',
             'htmlOptions' => array(
                 'class' => 'results'

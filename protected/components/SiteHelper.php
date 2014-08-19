@@ -100,7 +100,7 @@ class SiteHelper {
 	public static function russianDate($datetime = null, $outYear = true, $outTime = false) {
         if (!$datetime || $datetime == 0)
             return '';
-            
+
 		if (is_numeric($datetime) ) {
 			$timestamp = $datetime;
 		} else if (is_string($datetime)) {
@@ -108,6 +108,7 @@ class SiteHelper {
         } else {
 			$timestamp = time();
 		}
+
 		$date = explode(".", date("j.m.Y", $timestamp));
 		$m = self::russianMonth($date[1]);
 		$out = $date[0] . ' ' . $m;
@@ -115,7 +116,7 @@ class SiteHelper {
             $out .= ' ' . $date[2];
         }
         if ( $outTime ) {
-            $out .= ' в ' . date('H:i');
+            $out .= ' в ' . date('H:i', $timestamp);
         }
 		return $out;
 	}
@@ -158,6 +159,14 @@ class SiteHelper {
             return $_str;
         else
             return mb_substr($_str, 0, $maxlen, 'UTF-8').' '.$endintro;
+    }
+
+    public static function linkify($url)
+    {
+    	if ((strpos($url, 'http://') === false) AND (strpos($url, 'https://') === false))
+    		return 'http://'.$url;
+    	else
+    		return $url;
     }
 
 
