@@ -78,6 +78,10 @@ function hideBacklight(el) {
 
 $(document).ready(function(){
 
+    // плагин для формы фильтра
+    $('form.filter').FilterForm();
+
+
 	//магия дропдаунов
 
 	$('.noshadow').each(function(){
