@@ -6,5 +6,5 @@
 	  <li><a href="#">Избранное</a></li>
 	  <li><a href="/user/logout/">Выйти</a></li>
 	</ul>
-	<img src="<?= $user->img_photo;?>">
+	<img src="<?= $user->profile->img_photo;?>">
 </div>
