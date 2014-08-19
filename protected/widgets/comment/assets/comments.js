@@ -36,4 +36,9 @@ $(document).ready(function() {
         return false;
     });
 
+
+    setTimeout(function() {
+        $('#comment-form .alert').fadeOut(200);
+    }, 2000);
+
 });

@@ -148,6 +148,12 @@ class Comment extends CActiveRecord
             return false;
 
         $this->_isNew = $this->isNewRecord;
+
+        if ( $this->isNewRecord ) {
+            $this->date = date('Y-m-d H:i:s');
+            $this->user_id = Yii::app()->user->id;
+        }
+
         return parent::beforeSave();
     }
 
@@ -168,7 +174,6 @@ class Comment extends CActiveRecord
 
     protected function afterDelete()
     {
-        die('asdfasdasad');
         $this->updateMaterial();
         parent::afterDelete();
     }

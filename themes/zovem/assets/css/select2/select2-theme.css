@@ -1,0 +1,101 @@
+.select2-container,
+.select2-container-active,
+.select2-dropdown-open {
+  display: inline-block;
+  vertical-align: top;
+}
+.select2-container .select2-choice,
+.select2-container-active .select2-choice,
+.select2-dropdown-open .select2-choice {
+  border: none;
+  border-bottom: 1px #83d0f6 dashed;
+  line-height: 1.2;
+  color: inherit;
+  background-image: none;
+  background-color: inherit;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  height: auto;
+  margin-bottom: 12px;
+}
+.select2-container .select2-choice:hover,
+.select2-container-active .select2-choice:hover,
+.select2-dropdown-open .select2-choice:hover {
+  color: #83d0f6;
+}
+.select2-container .select2-choice span,
+.select2-container-active .select2-choice span,
+.select2-dropdown-open .select2-choice span {
+  margin-right: 14px;
+}
+.select2-container .select2-choice div,
+.select2-container-active .select2-choice div,
+.select2-dropdown-open .select2-choice div {
+  border-radius: 0;
+  border-left: none;
+  background-color: inherit;
+  background-image: none;
+  width: 7px;
+}
+.select2-container .select2-choice div b,
+.select2-container-active .select2-choice div b,
+.select2-dropdown-open .select2-choice div b {
+  width: 7px;
+  height: 4px;
+  position: relative;
+  top: 50%;
+  margin-top: -4px;
+  background: url(../../img/dropdown.png) no-repeat;
+}
+.select2-container .select2-choice abbr,
+.select2-container-active .select2-choice abbr,
+.select2-dropdown-open .select2-choice abbr {
+  width: 7px;
+  height: 8px;
+  right: 0;
+  top: 5px;
+  z-index: 10;
+  background: url(../../img/dropdown.png) no-repeat;
+}
+.select2-container .select2-choice abbr:hover,
+.select2-container-active .select2-choice abbr:hover,
+.select2-dropdown-open .select2-choice abbr:hover {
+  background-position: -14px 0;
+}
+.select2-dropdown-open .select2-choice {
+  color: #83d0f6;
+}
+.select2-drop {
+  -webkit-box-shadow: 0 0 21px 0 rgba(0, 0, 0, 0.26);
+  box-shadow: 0 0 21px 0 rgba(0, 0, 0, 0.26);
+  border: none;
+  border-radius: 0;
+}
+.select2-drop:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -10px;
+  bottom: auto;
+  background: white;
+  left: 0;
+  height: 10px;
+  z-index: 1001;
+  width: 100%;
+}
+.select2-drop .select2-results .select2-result {
+  text-decoration: underline;
+  text-decoration-color: #83d0f6;
+}
+.select2-drop .select2-results .select2-highlighted {
+  background: inherit;
+  color: #83d0f6;
+}
+.select2-drop .select2-results .select2-match {
+  font-weight: bold;
+  color: #000;
+  text-decoration-color: #000;
+}

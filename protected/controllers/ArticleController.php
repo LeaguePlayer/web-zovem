@@ -7,6 +7,8 @@ class ArticleController extends FrontController
 {
     public function actionIndex($tag = null)
     {
+        $articleFilter = new Article('search');
+
         $criteria = new CDbCriteria;
         $criteria->with = array();
 
@@ -29,7 +31,7 @@ class ArticleController extends FrontController
 
         $articles = Article::model()->published()->findAll($criteria);
         $authors = User::model()->hasArticles()->findAll();
-        $sections = Section::model()->hasArticles()->findAll();
+        $sections = Section::model()->findAll();
         $allTags = Tag::model()->hasArticles()->findAll();
 
         $dataProvider = new CArrayDataProvider($articles, array(
@@ -40,6 +42,7 @@ class ArticleController extends FrontController
 
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+            'articleFilter' => $articleFilter,
             'sections' => $sections,
             'authors' => $authors,
             'tags' => $allTags,
