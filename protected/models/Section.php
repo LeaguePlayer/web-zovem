@@ -174,6 +174,32 @@ class Section extends EActiveRecord
         )->findAll();
     }
 
+    public static function getOrganiserSections($city_id = null)
+    {
+        $cityCond = '';
+        if (! is_null($city_id) && is_numeric($city_id))
+            $cityCond = ' AND city_id = '.$city_id;
+        return Section::model()->with(
+            array(
+                'events'=>array(
+                    'limit' => 5,
+                    'condition' => 'events.status = '.Event::STATUS_PUBLISHED,
+                    'joinType'=>'INNER JOIN',
+                ),
+                'events.times'=>array(
+                    'limit'=>1,
+                    'order'=>'times.start_datetime ASC',
+                    'condition'=>'times.end_datetime >= NOW()',
+                    'joinType'=>'INNER JOIN',
+                ),
+                'events.current_contents',
+                'events.organiser'=>array(
+                    'joinType'=>'INNER JOIN',
+                ),
+            )
+        )->findAll();
+    }
+
 
     public function getUrl()
     {

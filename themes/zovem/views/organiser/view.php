@@ -29,61 +29,32 @@
         )) ?>
       </div>
       <div class="right-bar">
+
+      <? if (!empty($upcoming)):?>
         <h2>Этот устроитель
 представляет:</h2>
         <ul>
+          <? foreach($upcoming as $time): ?>
           <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
+            <a href="/event/view/time_id/<?= $time->id; ?>" title="<?= $time->event->current_contents->title;?>"><?= $time->event->current_contents->title;?></a>
+            <span class="date"><?= SiteHelper::russianDate($time->date, false, false); ?></span>
           </li>
-          <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
-          </li>
-          <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
-          </li>
-          <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
-          </li>
+          <? endforeach; ?>
         </ul>
+      <? endif; ?>
+
+      <? if (!empty($archived)):?>
         <h2 class="title"><span>Прошедшие анонсы</span></h2>
-        <ul class="finished">
+        <ul>
+          <? foreach($archived as $time): ?>
           <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
-            <div class="lcomments">
-              <a href="#" class="comments">14</a>
-              <a href="#" class="likes">120</a>
-            </div>
+            <a href="/event/view/time_id/<?= $time->id; ?>" title="<?= $time->event->current_contents->title;?>"><?= $time->event->current_contents->title;?></a>
+            <span class="date"><?= SiteHelper::russianDate($time->date, false, false); ?></span>
           </li>
-          <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
-            <div class="lcomments">
-              <a href="#" class="comments">14</a>
-              <a href="#" class="likes">120</a>
-            </div>
-          </li>
-          <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
-            <div class="lcomments">
-              <a href="#" class="comments">14</a>
-              <a href="#" class="likes">120</a>
-            </div>
-          </li>
-          <li>
-            <a href="#">Кинодень Японии: современное кино — Такэси Китано и Такаси Миикэ</a>
-            <span class="date">Мероприятия, 24 августа</span>
-            <div class="lcomments">
-              <a href="#" class="comments">14</a>
-              <a href="#" class="likes">120</a>
-            </div>
-          </li>
+          <? endforeach; ?>
         </ul>
+      <? endif; ?>
+
         <? if (!empty($articles)): ?>
         <h2>Статьи этого устранителя:</h2>
         <ul>
@@ -94,5 +65,6 @@
         <? endforeach; ?>
         </ul>
     	<? endif; ?>
+
       </div>
     </div>

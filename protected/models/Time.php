@@ -52,6 +52,12 @@ class Time extends EActiveRecord
             'future' => array(
                 'condition'=>'date > CURDATE()',
             ),
+            'upcoming' => array(
+                'condition'=>'start_datetime >= NOW()',
+            ),
+            'archived' => array(
+                'condition'=>'end_datetime <= NOW()',
+            ),
         );
     }
 
@@ -73,6 +79,12 @@ class Time extends EActiveRecord
         }
         else if ($when == 'future') {
             return $this->future();
+        }
+        else if ($when == 'upcoming') {
+            return $this->upcoming();
+        }
+        else if ($when == 'archived') {
+            return $this->archived();
         }
         else if (is_string($when)) {
             return $this->inDay(date('Y-m-d', strtotime($when)));

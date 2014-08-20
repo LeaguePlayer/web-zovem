@@ -1882,7 +1882,8 @@ span.button, .comments .form-bottom span.submit {
   text-transform: none !important; }
 
 .placespeople .item ul li {
-  position: relative; }
+  position: relative;
+  min-height: 55px; }
 
 .placespeople .item .logo {
   position: absolute;

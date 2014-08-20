@@ -76,6 +76,7 @@ class Event extends Material
             'template'=>array(self::BELONGS_TO, 'Template', 'template_id'),
             'user'=>array(self::BELONGS_TO, 'User', 'user_id'),
             'times'=>array(self::HAS_MANY, 'Time', 'event_id'),
+            'organiser'=>array(self::HAS_ONE, 'Organiser', array('id'=>'user_id'), 'through'=>'user' ),
         );
     }
 

@@ -86,7 +86,7 @@ $filterForm = $this->beginWidget('CActiveForm', array(
             <? endforeach ?>
         </ul>
 
-        <h2><a href="#">Анонсы</a></h2>
+        <h2><a href="/event/">Анонсы</a></h2>
     </div>
 
     <? $this->widget('zii.widgets.CListView', array(

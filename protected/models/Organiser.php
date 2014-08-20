@@ -42,6 +42,8 @@ class Organiser extends EActiveRecord
             'country'=>array(self::BELONGS_TO, 'Country', 'country_id'),
             'city'=>array(self::BELONGS_TO, 'City', 'city_id'),
             'metro'=>array(self::BELONGS_TO, 'Metro', 'metro_id'),
+            'events'=>array(self::HAS_MANY, 'Event', array('id'=>'user_id'), 'through'=>'user' ),
+            'times'=>array(self::HAS_MANY, 'Time', array('id'=>'event_id'), 'through'=>'events' ),
         );
     }
 
@@ -83,7 +85,6 @@ class Organiser extends EActiveRecord
                 'purifierOptions' => array(
                     'Core.EscapeInvalidTags' => true,
                     'AutoFormat.AutoParagraph' => false,
-                    'AutoFormat.Linkify' => true,
                     'HTML.Allowed' => 'b,i,p',
                     'HTML.Nofollow' => true,
                 ),

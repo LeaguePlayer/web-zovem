@@ -224,4 +224,14 @@ class EActiveRecord extends CActiveRecord
         return get_class($this);
     }
 
+    public function limited($limit = 5)
+    {
+        if (!is_numeric($limit))
+            $limit = 5;
+        $this->getDbCriteria()->mergeWith(array(
+            'limit'=>$limit,
+        ));
+        return $this;
+    }
+
 }

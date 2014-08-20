@@ -8,9 +8,9 @@ class EventController extends FrontController
 	{
 		$times = Time::model()
 			->with(array(
-				array('event'=>array(
+				'event'=>array(
 					'condition' => 'event.status = '.Event::STATUS_PUBLISHED,
-				)),
+				),
 				'event.current_contents',
 				'event.current_contents.section',
 			))
@@ -64,6 +64,15 @@ class EventController extends FrontController
 				$favorite->save();
 			}
 		}
+	}
+
+	public function limited($limit = 5) {
+		if (!is_numeric($limit))
+			$limit = 5;
+		$this->getDbCriteria()->mergeWith(array(
+	        'limit'=>$limit,
+	    ));
+	    return $this;
 	}
 
 
