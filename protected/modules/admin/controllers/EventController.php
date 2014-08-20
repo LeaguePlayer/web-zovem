@@ -94,7 +94,7 @@ class EventController extends AdminController
 
 	public function actionCreate()
     {
-    	Yii::import('appext.EGMap.*');
+    	Yii::import('appext.egmap.*');
 
         $model = new Event();
         $contents = new Contents();
@@ -151,7 +151,7 @@ class EventController extends AdminController
 
 	public function actionUpdate($id)
     {
-    	Yii::import('appext.EGMap.*');
+    	Yii::import('appext.egmap.*');
 
         $model = Event::model()->findByPk($id);
         $contents = $model->current_contents;
