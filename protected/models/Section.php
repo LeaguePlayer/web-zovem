@@ -159,7 +159,6 @@ class Section extends EActiveRecord
         return Section::model()->with(
             array(
                 'events'=>array(
-                    'limit' => 5,
                     'condition' => 'events.status = '.Event::STATUS_PUBLISHED,
                     'joinType'=>'INNER JOIN',
                 ),

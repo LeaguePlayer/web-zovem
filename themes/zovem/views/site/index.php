@@ -22,7 +22,7 @@
           <a href="#" class="rss" title="RSS"></a>
           <h2><a href="#" title="Зовём <?= $section->title;?>"><?= $section->title;?></a><span><img src="<?= $section->getImageUrl();?>" alt="Зовём <?= $section->title;?>"></span></h2>
           <ul>
-          	<? foreach($section->events as $event) :?>
+          	<? foreach($section->events(array('limit'=>5)) as $event) :?>
             <li<? if($event->current_contents->type):?> class="active"<?endif;?>>
               <p class="link">
                 <a href="/event/view/time_id/<?= $event->current_contents->times[0]->id;?>" title="<?= $event->current_contents->title; ?>"><?= $event->current_contents->title; ?></a>
